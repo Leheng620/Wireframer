@@ -1,0 +1,194 @@
+{
+	"wireframeLists": [
+        {
+            "key": 0,
+            "name": "My Dumb App",
+			"selected": null,
+            "controls": [
+				{
+					"key": 0,
+					"type": "container",
+					"height": 100,
+					"width": 100,
+					"xPos": 40,
+					"yPos": 50,
+					"prop": "container",
+					"fontSize": 12,
+					"backgroundColor": "#d8d8d8",
+					"borderColor": "#000000",
+					"borderThickness": 2,
+					"borderRadius": 2
+				},
+				{
+					"key": 1,
+					"type": "label",
+					"height": 20,
+					"width": 80,
+					"xPos": 50,
+					"yPos": 60,
+					"prop": "label",
+					"fontSize": 12,
+					"backgroundColor": "#d8d8d8",
+					"borderColor": "#000000",
+					"borderThickness": 2,
+					"borderRadius": 2
+				},
+				{
+					"key": 2,
+					"type": "button",
+					"height": 30,
+					"width": 60,
+					"xPos": 50,
+					"yPos": 80,
+					"prop": "button",
+					"fontSize": 12,
+					"backgroundColor": "#d8d8d8",
+					"borderColor": "#000000",
+					"borderThickness": 2,
+					"borderRadius": 2
+				},
+				{
+					"key": 3,
+					"type": "textfield",
+					"height": 20,
+					"width": 100,
+					"xPos": 50,
+					"yPos": 100,
+					"prop": "textfield",
+					"fontSize": 12,
+					"backgroundColor": "#d8d8d8",
+					"borderColor": "#000000",
+					"borderThickness": 2,
+					"borderRadius": 2
+				}
+			]
+        },
+        {
+            "key": 1,
+            "name": "My Homepage",
+			"selected": null,
+            "controls": [
+				{
+					"key": 0,
+					"type": "container",
+					"height": 200,
+					"width": 200,
+					"xPos": 20,
+					"yPos": 20,
+					"prop": "container",
+					"fontSize": 14,
+					"backgroundColor": "#d8d8d8",
+					"borderColor": "#ffffff",
+					"borderThickness": 3,
+					"borderRadius": 2
+				},
+				{
+					"key": 1,
+					"type": "label",
+					"height": 20,
+					"width": 80,
+					"xPos": 40,
+					"yPos": 70,
+					"prop": "label",
+					"fontSize": 12,
+					"backgroundColor": "#d8d8d8",
+					"borderColor": "#000000",
+					"borderThickness": 2,
+					"borderRadius": 2
+				},
+				{
+					"key": 2,
+					"type": "button",
+					"height": 30,
+					"width": 60,
+					"xPos": 40,
+					"yPos": 100,
+					"prop": "button",
+					"fontSize": 14,
+					"backgroundColor": "#d8d8d8",
+					"borderColor": "#000000",
+					"borderThickness": 3,
+					"borderRadius": 1
+				},
+				{
+					"key": 3,
+					"type": "textfield",
+					"height": 20,
+					"width": 100,
+					"xPos": 50,
+					"yPos": 130,
+					"prop": "textfield",
+					"fontSize": 14,
+					"backgroundColor": "#d8d8d8",
+					"borderColor": "#011111",
+					"borderThickness": 4,
+					"borderRadius": 2
+				}
+			]
+        },
+		{
+            "key": 2,
+            "name": "CSE316Homepage",
+			"selected": 1,
+            "controls": [
+				{
+					"key": 0,
+					"type": "container",
+					"height": 150,
+					"width": 150,
+					"xPos": 30,
+					"yPos": 10,
+					"prop": "container",
+					"fontSize": 10,
+					"backgroundColor": "#d8d8d8",
+					"borderColor": "#000000",
+					"borderThickness": 3,
+					"borderRadius": 5
+				},
+				{
+					"key": 1,
+					"type": "label",
+					"height": 20,
+					"width": 30,
+					"xPos": 30,
+					"yPos": 30,
+					"prop": "label",
+					"fontSize": 10,
+					"backgroundColor": "#d8d8d8",
+					"borderColor": "#000000",
+					"borderThickness": 3,
+					"borderRadius": 1
+				},
+				{
+					"key": 2,
+					"type": "button",
+					"height": 30,
+					"width": 60,
+					"xPos": 50,
+					"yPos": 80,
+					"prop": "button",
+					"fontSize": 10,
+					"backgroundColor": "#d8d8d8",
+					"borderColor": "#000000",
+					"borderThickness": 2,
+					"borderRadius": 2
+				},
+				{
+					"key": 3,
+					"type": "textfield",
+					"height": 20,
+					"width": 100,
+					"xPos": 50,
+					"yPos": 120,
+					"prop": "textfield",
+					"fontSize": 10,
+					"backgroundColor": "#d8d8d8",
+					"borderColor": "#000000",
+					"borderThickness": 2,
+					"borderRadius": 2
+				}
+			]
+        }
+		
+    ]
+}
