@@ -8,13 +8,12 @@ class WireframeListLinks extends React.Component {
     render() {
         const wireframeLists = this.props.wireframeLists;
         const id = this.props.auth.uid;
-        console.log("fuck");
         console.log(wireframeLists);
         return (
             <div className="todo-lists section">
                 {wireframeLists && wireframeLists.map(wireframeList => (
                     <Link to={'/wireframe/'+id+'/'+wireframeList.key} key={wireframeList.key}>
-                        <WireframeListCard wireframeList={wireframeList} />
+                        <WireframeListCard wireframeList={wireframeList} delete={this.props.delete} />
                     </Link>
                 ))}
             </div>

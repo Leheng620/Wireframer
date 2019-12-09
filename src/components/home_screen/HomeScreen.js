@@ -15,14 +15,13 @@ class HomeScreen extends Component {
                 <NavLink to="/databaseTester">Database Tester</NavLink>
             );
         }else{
-            return null 
+            return null;
         }
-        
     }
 
-    createWireframeList = () => {
+    createWireframe = () => {
         const { wireframeLists } = this.props;
-        const { id } = this.props.auth.uid; //current account
+        const id = this.props.auth.uid; //current account
         let list = {
             "key": 0,
             "name": "Unknown",
@@ -36,11 +35,22 @@ class HomeScreen extends Component {
         }).then(() => {
             this.props.history.push({pathname: "/wireframe/"+id + "/"+list.key});
         });
+    }
 
+    deleteWireframe = (key, event) => {
+        event.stopPropagation();
+        event.preventDefault();
+        const { wireframeLists } = this.props;
+        const id = this.props.auth.uid; //current account
+        let list = wireframeLists.filter(wireframe => wireframe.key !== key);
+        this.fixKey(list);
+        getFirestore().collection('users').doc(id).update({
+            wireframeLists: list
+        })
     }
 
     fixKey = (wireframeLists) => {
-        for(let i = 1; i < wireframeLists.length; i++){
+        for(let i = 0; i < wireframeLists.length; i++){
             wireframeLists[i].key = i;
         }
     }
@@ -54,7 +64,7 @@ class HomeScreen extends Component {
             <div className="dashboard container">
                 <div className="row">
                     <div className="col s12 m4">
-                        <WireframeListLinks />
+                        <WireframeListLinks delete={this.deleteWireframe} />
                     </div>
                     <div className="col s8">
                         <div className="banner">
@@ -62,7 +72,7 @@ class HomeScreen extends Component {
                             List Maker
                         </div>
                         <div className="home_new_list_container" style={{paddingTop:'5px'}}>
-                                <Button className="home_new_list_button" waves="light" large style={{height:'120px'}} onClick={this.createWireframeList}>
+                                <Button className="home_new_list_button" waves="light" large style={{height:'120px'}} onClick={this.createWireframe}>
                                     Create a New Wireframe
                                 </Button>
                         </div>
