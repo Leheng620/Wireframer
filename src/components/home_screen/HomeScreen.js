@@ -4,12 +4,38 @@ import { compose } from 'redux';
 import { NavLink, Redirect } from 'react-router-dom';
 import { firestoreConnect } from 'react-redux-firebase';
 import WireframeListLinks from './WireframeListLinks';
-import {Button} from 'react-materialize';
+import { Button } from 'react-materialize';
+import { getFirestore } from 'redux-firestore';
 
 class HomeScreen extends Component {
 
-    createWireframeList = () => {
+    administrator = () => {
+        if(this.props.profile.admin){
+            return (
+                <NavLink to="/databaseTester">Database Tester</NavLink>
+            );
+        }else{
+            return null 
+        }
         
+    }
+
+    createWireframeList = () => {
+        const { wireframeLists } = this.props;
+        const { id } = this.props.auth.uid;
+        let list = {
+            "key": 0,
+            "name": "Unknown",
+			"selected": null,
+            "controls": []
+        };
+        wireframeLists.splice(0, 0, list);
+        getFirestore().collection('users').doc(id).update({
+            wireframeLists: wireframeLists
+        }).then(doc => {
+            this.props.history.push({pathname: "/wireframe/"+id + "/"+doc.id});
+        });
+
     }
 
     render() {
@@ -34,7 +60,7 @@ class HomeScreen extends Component {
                                 </Button>
                         </div>
                     </div>
-
+                    {this.administrator()}
                 </div>
             </div>
         );
@@ -43,7 +69,9 @@ class HomeScreen extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        auth: state.firebase.auth
+        auth: state.firebase.auth,
+        profile: state.firebase.profile,
+        wireframeLists: state.firebase.profile.wireframeLists,
     };
 };
 

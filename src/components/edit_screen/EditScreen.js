@@ -15,6 +15,6 @@ class EditScreen extends Component{
 }
 
 export default compose(
-    connect(mapStateToProps),
+    connect(),
     firestoreConnect(),
 )(EditScreen);

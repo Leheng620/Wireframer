@@ -7,9 +7,9 @@ import { firebaseConnect } from 'react-redux-firebase';
 
 class WelcomeScreen extends Component{
     render(){
-        // if(this.props.auth.uid){
-        //     return <Redirect to={"/wireframe/"+auth.uid} />; //return to home screen if is login
-        // }
+        if(this.props.auth.uid){//return to home screen if is login
+            return <Redirect to={"/wireframe/"+this.props.auth.uid} />; 
+        }
         return(
             <div>
                 <div>
@@ -23,4 +23,11 @@ class WelcomeScreen extends Component{
     }
 }
 
-export default WelcomeScreen;
+const mapStateToProps = state => ({
+    auth: state.firebase.auth,
+});
+  
+export default compose(
+    firebaseConnect(),
+    connect(mapStateToProps),
+)(WelcomeScreen);

@@ -1,7 +1,9 @@
 import React from 'react'
 import { connect } from 'react-redux';
-import todoJson from './TestTodoListData.json'
+import wireframeJson from './TestWireframeData.json'
 import { getFirestore } from 'redux-firestore';
+import { firestore } from 'firebase';
+import { Redirect } from 'react-router-dom';
 
 class DatabaseTester extends React.Component {
 
@@ -10,30 +12,43 @@ class DatabaseTester extends React.Component {
     // TO LOG IN
     handleClear = () => {
         const fireStore = getFirestore();
-        fireStore.collection('todoLists').get().then(function(querySnapshot){
-            querySnapshot.forEach(function(doc) {
-                console.log("deleting " + doc.id);
-                fireStore.collection('todoLists').doc(doc.id).delete();
-            })
-        });
+        const id = this.props.auth.uid;
+        // fireStore.collection('todoLists').get().then(function(querySnapshot){
+        //     querySnapshot.forEach(function(doc) {
+        //         console.log("deleting " + doc.id);
+        //         fireStore.collection('todoLists').doc(doc.id).delete();
+        //     })
+        // });
+        fireStore.collection('users').doc(id).update({
+            wireframeLists : []
+        })
     }
 
     handleReset = () => {
         const fireStore = getFirestore();
-        todoJson.todoLists.forEach(todoListJson => {
-            fireStore.collection('todoLists').add({
-                    name: todoListJson.name,
-                    owner: todoListJson.owner,
-                    items: todoListJson.items
-                }).then(() => {
-                    console.log("DATABASE RESET");
-                }).catch((err) => {
-                    console.log(err);
-                });
+        const id = this.props.auth.uid;
+        const wireframeLists = this.props.profile.wireframeLists;
+        wireframeJson.wireframeLists.forEach(wireframeListJson => {
+            wireframeLists.push({
+                    key: wireframeListJson.key,
+                    name: wireframeListJson.name,
+                    selected: wireframeListJson.selected,
+                    controls: wireframeListJson.controls
+                })
+        });
+        fireStore.collection('users').doc(id).update({
+            wireframeLists: wireframeLists
+        }).then(() => {
+            console.log("DATABASE RESET");
+        }).catch((err) => {
+            console.log(err);
         });
     }
 
     render() {
+        if (!this.props.auth.uid || !this.props.profile.admin) {
+            return <Redirect to="/" />;
+        }
         return (
             <div>
                 <button onClick={this.handleClear}>Clear Database</button>
@@ -45,6 +60,7 @@ class DatabaseTester extends React.Component {
 const mapStateToProps = function (state) {
     return {
         auth: state.firebase.auth,
+        profile: state.firebase.profile,
         firebase: state.firebase
     };
 }
