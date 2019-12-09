@@ -4,7 +4,7 @@ class WireframeListCard extends React.Component {
 
     render() {
         const { wireframeList } = this.props;
-        console.log("wireframeList, wireframeList.id: " + wireframeList.id);
+        console.log("wireframeList, wireframeList.id: " + wireframeList.key);
         return (
             <div className="card z-depth-0 todo-list-link">
                 <div className="card-content grey-text text-darken-3">

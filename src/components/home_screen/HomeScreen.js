@@ -22,7 +22,7 @@ class HomeScreen extends Component {
 
     createWireframeList = () => {
         const { wireframeLists } = this.props;
-        const { id } = this.props.auth.uid;
+        const { id } = this.props.auth.uid; //current account
         let list = {
             "key": 0,
             "name": "Unknown",
@@ -30,12 +30,19 @@ class HomeScreen extends Component {
             "controls": []
         };
         wireframeLists.splice(0, 0, list);
+        this.fixKey(wireframeLists);
         getFirestore().collection('users').doc(id).update({
             wireframeLists: wireframeLists
-        }).then(doc => {
-            this.props.history.push({pathname: "/wireframe/"+id + "/"+doc.id});
+        }).then(() => {
+            this.props.history.push({pathname: "/wireframe/"+id + "/"+list.key});
         });
 
+    }
+
+    fixKey = (wireframeLists) => {
+        for(let i = 1; i < wireframeLists.length; i++){
+            wireframeLists[i].key = i;
+        }
     }
 
     render() {
@@ -55,8 +62,8 @@ class HomeScreen extends Component {
                             List Maker
                         </div>
                         <div className="home_new_list_container" style={{paddingTop:'5px'}}>
-                                <Button className="home_new_list_button" waves="light" large style={{height:'120px'}}>
-                                    Create a New To Do List
+                                <Button className="home_new_list_button" waves="light" large style={{height:'120px'}} onClick={this.createWireframeList}>
+                                    Create a New Wireframe
                                 </Button>
                         </div>
                     </div>
