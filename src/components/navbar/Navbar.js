@@ -5,9 +5,23 @@ import { compose } from 'redux';
 import { firebaseConnect } from 'react-redux-firebase';
 import LoggedInLinks from './LoggedInLinks';
 import LoggedOutLinks from './LoggedOutLinks';
+import { getFirestore } from 'redux-firestore';
+
 
 class Navbar extends React.Component {
 
+  fixKey = (auth,profile) => {
+    if(auth.uid){
+      let wireframeLists = profile.wireframeLists;
+      for(let i = 0; i < wireframeLists.length; i++){
+          wireframeLists[i].key = i;
+      }
+      getFirestore().collection('users').doc(auth.uid).update({
+        wireframeLists: wireframeLists
+      })
+    }
+    
+  }
   render() {
     const { auth, profile } = this.props;
     const links = auth.uid ? <LoggedInLinks profile={profile} /> : <LoggedOutLinks />;
@@ -16,7 +30,7 @@ class Navbar extends React.Component {
     return (
       <nav className="nav-wrapper grey darken-3">
         <div className="container">
-          <Link to="/" className="brand-logo">@todo</Link>
+          <Link onClick={() => this.fixKey(auth,profile)} to="/" className="brand-logo">@todo</Link>
           {links}
         </div>
       </nav>

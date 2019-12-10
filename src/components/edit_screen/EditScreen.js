@@ -3,11 +3,9 @@ import { Redirect } from 'react-router-dom'
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { firestoreConnect } from 'react-redux-firebase';
+import { getFirestore } from 'redux-firestore';
 
 class EditScreen extends Component{
-
-    
-
     render(){
         if(!this.props.wireframe){
             return <React.Fragment/>;
@@ -21,10 +19,14 @@ class EditScreen extends Component{
 }
 
 const mapStateToProps = (state, ownProps) => {
-    console.log(ownProps);
     const { key } = ownProps.match.params;
     const { wireframeLists } = state.firebase.profile;
-    const wireframe = wireframeLists ? wireframeLists[key] : null;
+    let wireframe = wireframeLists ? wireframeLists[0] : null;
+    if(wireframe){
+        if(wireframeLists[0].key != key){
+            wireframe = wireframeLists[key];
+        }
+    }
     return {
         wireframe,
         auth: state.firebase.auth,
