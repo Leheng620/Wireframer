@@ -10,13 +10,13 @@ class Navbar extends React.Component {
 
   render() {
     const { auth, profile } = this.props;
-    const links = auth.uid ? <LoggedInLinks profile={profile} /> : null;
-    const path = auth.uid ? "/wireframe/" + auth.uid : "/";
+    const links = auth.uid ? <LoggedInLinks profile={profile} /> : <LoggedOutLinks />;
+    //const path = auth.uid ? "/wireframe/" + auth.uid : "/";
 
     return (
       <nav className="nav-wrapper grey darken-3">
         <div className="container">
-          <Link to={path} className="brand-logo">@todo</Link>
+          <Link to="/" className="brand-logo">@todo</Link>
           {links}
         </div>
       </nav>

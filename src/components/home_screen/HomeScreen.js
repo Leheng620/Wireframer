@@ -30,11 +30,10 @@ class HomeScreen extends Component {
         };
         wireframeLists.splice(0, 0, list);
         this.fixKey(wireframeLists);
+        this.props.history.push({pathname: "/wireframe/"+id + "/"+list.key});
         getFirestore().collection('users').doc(id).update({
             wireframeLists: wireframeLists
-        }).then(() => {
-            this.props.history.push({pathname: "/wireframe/"+id + "/"+list.key});
-        });
+        })
     }
 
     deleteWireframe = (key, event) => {
@@ -57,7 +56,7 @@ class HomeScreen extends Component {
 
     render() {
         if (!this.props.auth.uid) {
-            return <Redirect to="/" />;
+            return <Redirect to="/login" />;
         }
 
         return (

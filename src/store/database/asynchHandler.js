@@ -35,5 +35,18 @@ export const registerHandler = (newUser, firebase) => (dispatch, getState, { get
         dispatch(actionCreators.registerSuccess);
     }).catch((err) => {
         dispatch(actionCreators.registerError);
-    });
+        checkError(err);
+      });
 };
+
+export const checkError = (err) => {
+  let type = err.code.split('/')[1];
+  if (type.search('email') !== -1){
+    document.getElementById('email-error').innerHTML = err.message;
+  }else{
+    document.getElementById('email-error').innerHTML = "";
+  }
+  if (type.search('password') !== -1){
+    document.getElementById('password-error').innerHTML = err.message;
+  }
+}
