@@ -2,6 +2,39 @@ import React, { Component } from 'react';
 import { Button } from 'react-materialize';
 
 class LeftControl extends Component{
+
+    state = {
+        disableUdate: true,
+        width: this.props.wireframe.width,
+        height: this.props.wireframe.height,
+        widthError: false,
+        heightError: false
+    }
+
+    handleWidthChange = (e) => {
+        this.setState({disableUdate: false, width: e.target.value});
+    }
+    handleHeightChange = (e) =>{
+        this.setState({disableUdate: false, height: e.target.value});
+    }
+    handleUpdate = () => {
+        const { width, height } = this.state;
+        console.log(typeof width);
+        let widthError = false;
+        let heightError = false;
+        if(!Number(width) || !Number.isInteger(Number(width)) || Number(width) < 1 || Number(width) > 5000){
+            widthError = true;
+        }if(!Number(height) || !Number.isInteger(Number(height)) || Number(height) < 1 || Number(height) > 5000){
+            heightError = true;
+        }
+        if(widthError || heightError){
+            this.setState({widthError: widthError, heightError: heightError, disableUdate:true});
+        }else{
+            this.setState({widthError: widthError, heightError: heightError, disableUdate:true});
+            this.props.updateDimension(width, height);
+        }
+    }
+
     render(){
         return(
             <div className='control-panel white'>
@@ -18,18 +51,18 @@ class LeftControl extends Component{
                     <div className='dimension-input-control'>
                         <div className="input-field" style={{marginTop:'0.5rem'}}>
                             <span>Width:</span>
-                            <input className='browser-default right' type="text" name="dimension-width" id="dimension-width" size='10' />
-                            <span className="left red-text large" id="dimension-width-error"></span>
+                            <input className='browser-default right' type="text" name="dimension-width" id="dimension-width" size='10' value={this.state.width} onChange={this.handleWidthChange}/>
+                            <span className="red-text large right" id="dimension-width-error" hidden={!this.state.widthError} >Invalid width. Enter integer 1-5000</span>
                         </div>
                         <div className="input-field" style={{marginTop:'0.5rem'}}>
-                            <span>Heigth:</span>
-                            <input className='browser-default right' type="text" name="dimension-height" id="dimension-height" size='10' />
-                            <span className="left red-text large" id="dimension-height-error"></span>
+                            <span>Height:</span>
+                            <input className='browser-default right' type="text" name="dimension-height" id="dimension-height" size='10' value={this.state.height} onChange={this.handleHeightChange} />
+                            <span className="red-text large right" id="dimension-height-error" hidden={!this.state.heightError} >Invalid height. Enter integer 1-5000</span>
                         </div>
                         
                     </div>
                     <div style={{textAlign:'center'}}>
-                        <Button>Update</Button>
+                        <Button disabled={this.state.disableUdate} onClick={this.handleUpdate} >Update</Button>
                     </div>
                 </div>
                 <div className='controls-panel'>

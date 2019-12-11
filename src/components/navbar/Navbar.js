@@ -30,7 +30,7 @@ class Navbar extends React.Component {
     return (
       <nav className="nav-wrapper grey darken-3">
         <div className="container">
-          <Link onClick={() => this.fixKey(auth,profile)} to="/" className="brand-logo">@todo</Link>
+          <Link onClick={() => this.fixKey(auth,profile)} to="/" className="brand-logo" id="go-home">@todo</Link>
           {links}
         </div>
       </nav>

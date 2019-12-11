@@ -10,21 +10,53 @@ import RightControl from './RightControl';
 
 
 class EditScreen extends Component{
+    state = {
+        wireframe: JSON.parse(JSON.stringify(this.props.wireframe)),
+    }
+
+    fixKey = (auth,wireframeLists) => {
+        if(auth.uid){
+          let newWireframeLists = wireframeLists;
+          for(let i = 0; i < newWireframeLists.length; i++){
+            newWireframeLists[i].key = i;
+          }
+          getFirestore().collection('users').doc(auth.uid).update({
+            wireframeLists: newWireframeLists
+          })
+        }
+    }
+
+    updateDimension = (w, h) =>{
+        let wireframe = this.state.wireframe;
+        wireframe.width = Number(w);
+        wireframe.height = Number(h);
+        this.setState({wireframe: wireframe});
+    }
+
     render(){
         if(!this.props.wireframe){
             return <React.Fragment/>;
         }
+        if(!this.state.wireframe){
+            this.props.history.goBack();
+            this.fixKey(this.props.auth, this.props.wireframeLists);
+            return <React.Fragment/>;
+        }
+        
         return(
             <div className='edit-screen-container'>
                 <div className='wireframe-container'>
-                    <LeftControl />
+                    <LeftControl 
+                        wireframe={this.state.wireframe}
+                        updateDimension={this.updateDimension}
+                    />
 
                     <div className='wireframe-panel control-panel white'>
                         <div style={{textAlign:'center',border:'solid'}}>
                             <h4>Work Place</h4>
                         </div>
                         <div id='work-place'>
-                            <div className='' id='canvas'>
+                            <div className='' id='canvas' style={{width:this.state.wireframe.width, height:this.state.wireframe.height}}>
 
                             </div>
                         </div>

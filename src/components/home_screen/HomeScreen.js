@@ -25,7 +25,9 @@ class HomeScreen extends Component {
         let list = {
             "key": 0,
             "name": "Unknown",
-			"selected": null,
+            "selected": null,
+            "width":400,
+            "height":400,
             "controls": []
         };
         wireframeLists.splice(0, 0, list);
