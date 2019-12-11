@@ -48,4 +48,64 @@ input[type=password]:not(.browser-default):focus:not([readonly]) + label{
 }
 
 /* HomeScreen */
+/* EditScreen */
+.edit-screen-container{
+  width: 90%;
+  position: absolute;
+  height: 90%;
+  left: 5%;    
+  margin-top: 6px;
+}
+/* left, right and middle container */
+.control-panel{
+  width: 20%;
+  height: 100%;
+  float: left;
+  margin-left: 1%;
+}
+/* middle container */
+.wireframe-panel{
+  width: 56%
+}
+.wireframe-container{
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+.wireframe-option-panel{
+  height: 6%;
+  text-align: center;
+  padding: 3%;
+}
+.wireframe-option-control-button{
+  margin-left: 2%;
+  margin-right: 2%;
+}
+.dimension-control-panel{
+  display: inline-block;
+}
+.dimension-input-control{
+  width: 50%;
+  padding-left: 10%;
+  float: left;
+}
 
+/* the four controls panel */
+.controls-panel{
+  display: inline-block;
+  width: 100%;
+  text-align: center;
+  display: grid;
+  gap: 20%;
+  padding-top: 4%;
+}
+.controls{
+  text-align: center;
+}
+.controls-component{
+  display: inline-block;
+}
+.controls-prompt{
+  font-size: large;
+  font-weight: bold;
+}
