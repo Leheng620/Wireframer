@@ -28,17 +28,18 @@ class EditScreen extends Component{
                             </div>
                             <div className='dimension-input-control'>
                                 <div className="input-field">
-                                    <input type="text" name="dimension-width" id="dimension-width" placeholder="Height" />
+                                    <input className='browser-default' type="text" name="dimension-width" id="dimension-width" placeholder="Height" size='4' />
                                     <span className="left red-text large" id="dimension-width-error"></span>
                                 </div>
                                 <div className="input-field">
-                                    <input type="text" name="dimension-height" id="dimension-height" placeholder="width" />
+                                    <input className='browser-default' type="text" name="dimension-height" id="dimension-height" placeholder="width" size='4' />
                                     <span className="left red-text large" id="dimension-height-error"></span>
                                 </div>
+                                <div>
+                                    <Button>Update</Button>
+                                </div>
                             </div>
-                            <div>
-                                <Button>Update</Button>
-                            </div>
+                            
                         </div>
                         <div className='controls-panel'>
                             <div className='controls'>
@@ -56,7 +57,7 @@ class EditScreen extends Component{
                                 <div className='controls-prompt'>Button</div>
                             </div>
                             <div className='controls'>
-                                <input className='controls-component' style={{width:'60%'}} type='text' placeholder='Input' />
+                                <input className='browser-default controls-component' style={{width:'60%'}} type='text' placeholder='Input' />
                                 
                                 <div className='controls-prompt'>Textfield</div>
                             </div>
@@ -64,10 +65,41 @@ class EditScreen extends Component{
                     </div>
 
                     <div className='wireframe-panel control-panel white'>
+                        <div style={{textAlign:'center'}}>
+                            <h4>Work Place</h4>
+                        </div>
+                        <div id='work-place'>
 
+                        </div>
                     </div>
+
                     <div className='control-panel white'>
-                        
+                        <div className='property-panel'>
+                            <div>
+                                <div className='left'>Properties</div>
+                                <input className='browser-default' type='text' />
+                            </div>
+                            <div className='properties'>
+                                <span>Font Size:</span>
+                                <input className='browser-default right' type='text' id='font-size' size='10' />
+                            </div>
+                            <div className='properties'>
+                                <span>Background:</span>
+                                <input className='right' type='color' />
+                            </div>
+                            <div className='properties'>
+                                <span>Border Color:</span>
+                                <input className='right' type='color' />
+                            </div>
+                            <div className='properties'>
+                                <span>Border Thickness:</span>
+                                <input className='browser-default right' type='text' id='font-size' size='4' />
+                            </div>
+                            <div className='properties'>
+                                <span>Border Radius:</span>
+                                <input className='browser-default right' type='text' id='font-size' size='4' />
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

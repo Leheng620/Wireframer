@@ -65,7 +65,7 @@ input[type=password]:not(.browser-default):focus:not([readonly]) + label{
 }
 /* middle container */
 .wireframe-panel{
-  width: 56%
+  width: 56%;
 }
 .wireframe-container{
   position: absolute;
@@ -96,7 +96,7 @@ input[type=password]:not(.browser-default):focus:not([readonly]) + label{
   width: 100%;
   text-align: center;
   display: grid;
-  gap: 20%;
+  gap: 10%;
   padding-top: 4%;
 }
 .controls{
@@ -108,4 +108,21 @@ input[type=password]:not(.browser-default):focus:not([readonly]) + label{
 .controls-prompt{
   font-size: large;
   font-weight: bold;
+}
+
+/* property panel */
+.property-panel{
+  position: relative;
+  top: 2%;
+  left: 10%;
+  width: 80%;
+}
+.properties{
+  margin-top: 10%;
+}
+
+/* the work place */
+#work-place{
+  height: 90%;
+  overflow: scroll;
 }
