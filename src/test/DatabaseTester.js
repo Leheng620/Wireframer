@@ -33,6 +33,8 @@ class DatabaseTester extends React.Component {
                     key: wireframeListJson.key,
                     name: wireframeListJson.name,
                     selected: wireframeListJson.selected,
+                    width: wireframeListJson.width,
+                    height: wireframeListJson.height,
                     controls: wireframeListJson.controls
                 })
         });

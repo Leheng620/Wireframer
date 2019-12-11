@@ -62,6 +62,7 @@ input[type=password]:not(.browser-default):focus:not([readonly]) + label{
   height: 100%;
   float: left;
   margin-left: 1%;
+  overflow: auto;
 }
 /* middle container */
 .wireframe-panel{
@@ -73,21 +74,29 @@ input[type=password]:not(.browser-default):focus:not([readonly]) + label{
   height: 100%;
 }
 .wireframe-option-panel{
-  height: 6%;
+  height: auto;
   text-align: center;
   padding: 3%;
+  width: 100%;
 }
 .wireframe-option-control-button{
-  margin-left: 2%;
-  margin-right: 2%;
+  position: relative;
+}
+#wireframe-option-control-save, #wireframe-option-control-close{
+  width: 25%;
+  text-align: center;
+  padding: 0;
+  margin-right: 4%;
 }
 .dimension-control-panel{
   display: inline-block;
+  width: 100%;
 }
 .dimension-input-control{
-  width: 50%;
-  padding-left: 10%;
+  position: relative;
+  left: 10%;
   float: left;
+  width: 80%;
 }
 
 /* the four controls panel */
@@ -124,5 +133,14 @@ input[type=password]:not(.browser-default):focus:not([readonly]) + label{
 /* the work place */
 #work-place{
   height: 90%;
-  overflow: scroll;
+  overflow: auto;
+}
+#canvas{
+  width: 400px;
+  height: 400px;
+  margin: 0 auto;
+  margin-top: 1%;
+  overflow: hidden;
+  border:groove;
+  border-color: #fff333;
 }
