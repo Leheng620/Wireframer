@@ -18,6 +18,7 @@
 					"fontSize": 12,
 					"backgroundColor": "#d8d8d8",
 					"borderColor": "#000000",
+					"textColor": "#000000",
 					"borderThickness": 2,
 					"borderRadius": 2
 				},
@@ -32,6 +33,7 @@
 					"fontSize": 12,
 					"backgroundColor": "#d8d8d8",
 					"borderColor": "#000000",
+					"textColor": "#000000",
 					"borderThickness": 2,
 					"borderRadius": 2
 				},
@@ -46,6 +48,7 @@
 					"fontSize": 12,
 					"backgroundColor": "#d8d8d8",
 					"borderColor": "#000000",
+					"textColor": "#000000",
 					"borderThickness": 2,
 					"borderRadius": 2
 				},
@@ -60,6 +63,7 @@
 					"fontSize": 12,
 					"backgroundColor": "#d8d8d8",
 					"borderColor": "#000000",
+					"textColor": "#000000",
 					"borderThickness": 2,
 					"borderRadius": 2
 				}
@@ -83,6 +87,7 @@
 					"fontSize": 14,
 					"backgroundColor": "#d8d8d8",
 					"borderColor": "#ffffff",
+					"textColor": "#000000",
 					"borderThickness": 3,
 					"borderRadius": 2
 				},
@@ -97,6 +102,7 @@
 					"fontSize": 12,
 					"backgroundColor": "#d8d8d8",
 					"borderColor": "#000000",
+					"textColor": "#000000",
 					"borderThickness": 2,
 					"borderRadius": 2
 				},
@@ -111,6 +117,7 @@
 					"fontSize": 14,
 					"backgroundColor": "#d8d8d8",
 					"borderColor": "#000000",
+					"textColor": "#000000",
 					"borderThickness": 3,
 					"borderRadius": 1
 				},
@@ -125,6 +132,7 @@
 					"fontSize": 14,
 					"backgroundColor": "#d8d8d8",
 					"borderColor": "#011111",
+					"textColor": "#000000",
 					"borderThickness": 4,
 					"borderRadius": 2
 				}
@@ -148,6 +156,7 @@
 					"fontSize": 10,
 					"backgroundColor": "#d8d8d8",
 					"borderColor": "#000000",
+					"textColor": "#000000",
 					"borderThickness": 3,
 					"borderRadius": 5
 				},
@@ -162,6 +171,7 @@
 					"fontSize": 10,
 					"backgroundColor": "#d8d8d8",
 					"borderColor": "#000000",
+					"textColor": "#000000",
 					"borderThickness": 3,
 					"borderRadius": 1
 				},
@@ -176,6 +186,7 @@
 					"fontSize": 10,
 					"backgroundColor": "#d8d8d8",
 					"borderColor": "#000000",
+					"textColor": "#000000",
 					"borderThickness": 2,
 					"borderRadius": 2
 				},
@@ -190,6 +201,7 @@
 					"fontSize": 10,
 					"backgroundColor": "#d8d8d8",
 					"borderColor": "#000000",
+					"textColor": "#000000",
 					"borderThickness": 2,
 					"borderRadius": 2
 				}

@@ -52,12 +52,12 @@ class LeftControl extends Component{
                         <div className="input-field" style={{marginTop:'0.5rem'}}>
                             <span>Width:</span>
                             <input className='browser-default right' type="text" name="dimension-width" id="dimension-width" size='10' value={this.state.width} onChange={this.handleWidthChange}/>
-                            <span className="red-text large right" id="dimension-width-error" hidden={!this.state.widthError} >Invalid width. Enter integer 1-5000</span>
+                            <div className="red-text right" id="dimension-width-error" style={{fontSize:'',width:'100%'}} hidden={!this.state.widthError} >Invalid width. Enter integer 1-5000</div>
                         </div>
                         <div className="input-field" style={{marginTop:'0.5rem'}}>
                             <span>Height:</span>
                             <input className='browser-default right' type="text" name="dimension-height" id="dimension-height" size='10' value={this.state.height} onChange={this.handleHeightChange} />
-                            <span className="red-text large right" id="dimension-height-error" hidden={!this.state.heightError} >Invalid height. Enter integer 1-5000</span>
+                            <div className="red-text right" id="dimension-height-error" style={{fontSize:'',width:'100%'}} hidden={!this.state.heightError} >Invalid height. Enter integer 1-5000</div>
                         </div>
                         
                     </div>
@@ -66,20 +66,20 @@ class LeftControl extends Component{
                     </div>
                 </div>
                 <div className='controls-panel'>
-                    <div className='controls'>
-                        <div className='grey controls-component' style={{position:'relative',width:'40%',height:'50px'}}></div>
+                    <div className='controls' onClick={()=>{this.props.addControl('container',90,50,'#d8d8d8','#000000',2,2)}} >
+                        <div className='grey controls-component' style={{position:'relative',width:'90px',height:'50px'}}></div>
                         <div className='controls-prompt'>container</div>
                     </div>
-                    <div className='controls'>
-                        <div className='controls-component' style={{width:'60%',height:'5%'}} >Prompt for Imput:</div>
+                    <div className='controls' onClick={()=>{this.props.addControl('label',120,20,'#ffffff','#000000',0,0)}}>
+                        <div className='controls-component' style={{width:'60%',height:'5%'}} >Prompt for Input:</div>
                         <div className='controls-prompt'>Label</div>
                     </div>
-                    <div className='controls'>
-                        <button className='controls-component'>Submit</button>
+                    <div className='controls' onClick={()=>{this.props.addControl('button',85,36,'#bbb9b9','#000000',2,0)}}>
+                        <Button className='controls-component browser-default'>Submit</Button>
                         <br />
                         <div className='controls-prompt'>Button</div>
                     </div>
-                    <div className='controls'>
+                    <div className='controls' onClick={()=>{this.props.addControl('textfield',90,23,'#ffffff','#000000',0,1)}}>
                         <input className='browser-default controls-component' style={{width:'60%'}} type='text' placeholder='Input' />
                         <div className='controls-prompt'>Textfield</div>
                     </div>

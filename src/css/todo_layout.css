@@ -110,6 +110,7 @@ input[type=password]:not(.browser-default):focus:not([readonly]) + label{
 }
 .controls{
   text-align: center;
+  cursor: pointer;
 }
 .controls-component{
   display: inline-block;
