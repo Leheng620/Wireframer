@@ -142,4 +142,37 @@ input[type=password]:not(.browser-default):focus:not([readonly]) + label{
   overflow: hidden;
   border:groove;
   border-color: #fff333;
+  position: relative;
+}
+.top-right-box{
+  width: 10px;
+  height: 10px;
+  right: -5px;
+  top: -5px;
+  position: absolute;
+  background-color: black;
+}
+.down-right-box{
+  width: 10px;
+  height: 10px;
+  right: -5px;
+  bottom: -5px;
+  position: absolute;
+  background-color: black;
+}
+.top-left-box{
+  width: 10px;
+  height: 10px;
+  left: -5px;
+  top: -5px;
+  position: absolute;
+  background-color: black;
+}
+.down-left-box{
+  width: 10px;
+  height: 10px;
+  left: -5px;
+  bottom: -5px;
+  position: absolute;
+  background-color: black;
 }

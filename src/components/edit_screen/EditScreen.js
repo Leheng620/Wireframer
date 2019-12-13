@@ -7,7 +7,7 @@ import { getFirestore } from 'redux-firestore';
 import { Button } from 'react-materialize';
 import LeftControl from './LeftControl';
 import RightControl from './RightControl';
-import Draggable from 'react-draggable';
+import { Rnd } from "react-rnd";
 
 
 class EditScreen extends Component{
@@ -27,83 +27,132 @@ class EditScreen extends Component{
         }
     }
 
+    findControl(key){
+        let controls = this.state.wireframe.controls;
+        for(let i = 0; i < controls.length; i++){
+            if(controls[i].key == Number(key)){
+                return i;
+            }
+        }
+    }
+
     createElement = (component) =>{
+        const selected = this.state.wireframe.selected;
+        let selectedKey;
+        let hidden;
+        if(selected){
+            selectedKey = selected.key;
+            hidden = (selectedKey !== component.key);
+            
+        }else{
+            hidden = true
+        }
         if(component.type === 'container'){
-            let wireframeWidth = this.state.wireframe.width;
-            let wireframeHeight = this.state.wireframe.height;
-            let wireframeBorderThickness = 3; //maybe different $$$$$$$$$$$$$$$$$$$$$$$$$$$
-            let topLimit = 0;
-            let downLimit = wireframeHeight- component.height - component.borderThickness - wireframeBorderThickness;
-            let leftLimit = 0;
-            let rightLimit = wireframeWidth- component.width - component.borderThickness - wireframeBorderThickness;
+            // let wireframeWidth = 5000;
+            // let wireframeHeight = 5000;
+            // let wireframeBorderThickness = 3; //maybe different $$$$$$$$$$$$$$$$$$$$$$$$$$$
+            // let topLimit = 0;
+            // let downLimit = wireframeHeight- component.height - component.borderThickness*2 - wireframeBorderThickness*2;
+            // let leftLimit = 0;
+            // let rightLimit = wireframeWidth- component.width - component.borderThickness*2 - wireframeBorderThickness*2;
             return (
-                <Draggable key={component.key} defaultPosition={{x: component.xPos, y: component.yPos}} bounds={{top: topLimit, left: leftLimit, right: rightLimit, bottom: downLimit}} >
-                    <div 
-                        style={{width:component.width, height:component.height, borderStyle:'solid',
+                // bounds={{top: topLimit, left: leftLimit, right: rightLimit, bottom: downLimit}}
+                <Rnd key={component.key} default={{x: component.xPos, y: component.yPos, width:component.width, height:component.height}} 
+                    bounds='parent' onDragStop={this.onDragStop} onResizeStop={this.onResizeStop}
+                    enableResizing={{ top:false, right:false, bottom:false, left:false, topRight:!hidden, bottomRight:!hidden, bottomLeft:!hidden, topLeft:!hidden }} >
+                    
+                    <div id={component.key} 
+                        style={{width:'100%', height:'100%', borderStyle:'solid',
                         borderRadius:component.borderRadius, borderWidth:component.borderThickness, borderColor:component.borderColor,
                         fontSize:component.fontSize, color:component.textColor, backgroundColor:component.backgroundColor,
-                        position:'absolute'}}>
+                        }}>
 
                     </div>
-                </Draggable>
+                    <div className="top-left-box" hidden={hidden}></div>
+                    <div className="top-right-box" hidden={hidden}></div>
+                    <div className="down-left-box" hidden={hidden}></div>
+                    <div className="down-right-box" hidden={hidden}></div>
+                </Rnd>
             )
         }
         else if(component.type === 'label'){
-            let wireframeWidth = this.state.wireframe.width;
-            let wireframeHeight = this.state.wireframe.height;
-            let wireframeBorderThickness = 3; //maybe different $$$$$$$$$$$$$$$$$$$$$$$$$$$
-            let topLimit = 0;
-            let downLimit = wireframeHeight- component.height - component.borderThickness - wireframeBorderThickness;
-            let leftLimit = 0;
-            let rightLimit = wireframeWidth- component.width - component.borderThickness - wireframeBorderThickness;
+            // let wireframeWidth = 5000;
+            // let wireframeHeight = 5000;
+            // let wireframeBorderThickness = 3; //maybe different $$$$$$$$$$$$$$$$$$$$$$$$$$$
+            // let topLimit = 0;
+            // let downLimit = wireframeHeight- component.height - component.borderThickness*2 - wireframeBorderThickness*2;
+            // let leftLimit = 0;
+            // let rightLimit = wireframeWidth- component.width - component.borderThickness*2 - wireframeBorderThickness*2;
             return (
-                <Draggable key={component.key} defaultPosition={{x: component.xPos, y: component.yPos}} bounds={{top: topLimit, left: leftLimit, right: rightLimit, bottom: downLimit}} >
-                    <div 
-                        style={{width:component.width, height:component.height, borderStyle:'solid',
+                <Rnd key={component.key} default={{x: component.xPos, y: component.yPos, width:component.width, height:component.height}} 
+                bounds='parent' onDragStop={this.onDragStop} onResizeStop={this.onResizeStop}
+                enableResizing={{ top:false, right:false, bottom:false, left:false, topRight:!hidden, bottomRight:!hidden, bottomLeft:!hidden, topLeft:!hidden }}>
+
+                    <div id={component.key}
+                        style={{width:'100%', height:'100%', borderStyle:'solid',
                         borderRadius:component.borderRadius, borderWidth:component.borderThickness, borderColor:component.borderColor,
                         fontSize:component.fontSize, color:component.textColor, backgroundColor:component.backgroundColor,
-                        position:'absolute'}}>
+                        }}>
                             Prompt for Input:
                     </div>
-                </Draggable>
+                    <div className="top-left-box" hidden={hidden}></div>
+                    <div className="top-right-box" hidden={hidden}></div>
+                    <div className="down-left-box" hidden={hidden}></div>
+                    <div className="down-right-box" hidden={hidden}></div>
+                </Rnd>
             )
         }
         else if(component.type === 'button'){
-            let wireframeWidth = this.state.wireframe.width;
-            let wireframeHeight = this.state.wireframe.height;
-            let wireframeBorderThickness = 3; //maybe different $$$$$$$$$$$$$$$$$$$$$$$$$$$
-            let topLimit = 0;
-            let downLimit = wireframeHeight- component.height - component.borderThickness - wireframeBorderThickness;
-            let leftLimit = 0;
-            let rightLimit = wireframeWidth- component.width - component.borderThickness - wireframeBorderThickness;
+            // let wireframeWidth = 5000;
+            // let wireframeHeight = 5000;
+            // let wireframeBorderThickness = 3; //maybe different $$$$$$$$$$$$$$$$$$$$$$$$$$$
+            // let topLimit = 0;
+            // let downLimit = wireframeHeight- component.height - component.borderThickness*2 - wireframeBorderThickness*2;
+            // let leftLimit = 0;
+            // let rightLimit = wireframeWidth- component.width - component.borderThickness*2 - wireframeBorderThickness*2;
             return (
-                <Draggable key={component.key} defaultPosition={{x: component.xPos, y: component.yPos}} bounds={{top: topLimit, left: leftLimit, right: rightLimit, bottom: downLimit}} >
-                    <Button 
-                        style={{width:component.width, height:component.height, borderStyle:'solid',
+                <Rnd key={component.key} default={{x: component.xPos, y: component.yPos, width:component.width, height:component.height}} 
+                bounds='parent' onDragStop={this.onDragStop} onResizeStop={this.onResizeStop}
+                enableResizing={{ top:false, right:false, bottom:false, left:false, topRight:!hidden, bottomRight:!hidden, bottomLeft:!hidden, topLeft:!hidden }}>
+                    
+                    <button id={component.key} className='default'
+                        style={{width:'100%', height:'100%', borderStyle:'solid',
                         borderRadius:component.borderRadius, borderWidth:component.borderThickness, borderColor:component.borderColor,
                         fontSize:component.fontSize, color:component.textColor, backgroundColor:component.backgroundColor,
-                        position:'absolute'}}>
-                            button
-                    </Button>
-                </Draggable>
+                        }}>
+                            Submit
+                    </button>
+                    <div className="top-left-box" hidden={hidden}></div>
+                    <div className="top-right-box" hidden={hidden}></div>
+                    <div className="down-left-box" hidden={hidden}></div>
+                    <div className="down-right-box" hidden={hidden}></div>
+                </Rnd>
             )
         }
         else if(component.type === 'textfield'){
-            let wireframeWidth = this.state.wireframe.width;
-            let wireframeHeight = this.state.wireframe.height;
-            let wireframeBorderThickness = 3; //maybe different $$$$$$$$$$$$$$$$$$$$$$$$$$$
-            let topLimit = 0;
-            let downLimit = wireframeHeight- component.height - component.borderThickness - wireframeBorderThickness;
-            let leftLimit = 0;
-            let rightLimit = wireframeWidth- component.width - component.borderThickness - wireframeBorderThickness;
+            // let wireframeWidth = 5000;
+            // let wireframeHeight = 5000;
+            // let wireframeBorderThickness = 3; //maybe different $$$$$$$$$$$$$$$$$$$$$$$$$$$
+            // let topLimit = 0;
+            // let downLimit = wireframeHeight- component.height - component.borderThickness*2 - wireframeBorderThickness*2;
+            // let leftLimit = 0;
+            // let rightLimit = wireframeWidth- component.width - component.borderThickness*2 - wireframeBorderThickness*2;
             return (
-                <Draggable key={component.key} defaultPosition={{x: component.xPos, y: component.yPos}} bounds={{top: topLimit, left: leftLimit, right: rightLimit, bottom: downLimit}} >
-                    <input className='browser-default'
-                        style={{width:component.width, height:component.height, borderStyle:'solid',
+                
+                <Rnd key={component.key} default={{x: component.xPos, y: component.yPos, width:component.width, height:component.height}} 
+                bounds='parent' onDragStop={this.onDragStop} onResizeStop={this.onResizeStop}
+                enableResizing={{ top:false, right:false, bottom:false, left:false, topRight:!hidden, bottomRight:!hidden, bottomLeft:!hidden, topLeft:!hidden }}>
+                    
+                    <input className='browser-default' id={component.key}
+                        style={{width:'100%', height:'100%', borderStyle:'solid',
                         borderRadius:component.borderRadius, borderWidth:component.borderThickness, borderColor:component.borderColor,
                         fontSize:component.fontSize, color:component.textColor, backgroundColor:component.backgroundColor,
-                        position:'absolute'}} type='text' placeholder='Input' /> 
-                </Draggable>
+                        }} type='text' placeholder='Input' /> 
+                    <div className="top-left-box" hidden={hidden}></div>
+                    <div className="top-right-box" hidden={hidden}></div>
+                    <div className="down-left-box" hidden={hidden}></div>
+                    <div className="down-right-box" hidden={hidden}></div>
+                </Rnd>
             )
         }
     }
@@ -118,9 +167,10 @@ class EditScreen extends Component{
     addControl = (type,w,h,backgroundColor,borderColor,br,bt) =>{
         let frame = this.state.wireframe;
         let controls = frame.controls;
+        let len = controls.length==0 ? 0 : controls[controls.length-1].key + 1;
         let newControl = {
             type: type,
-            key:controls.length,
+            key: len,
             height:h,
             width:w,
             xPos:0,
@@ -138,6 +188,83 @@ class EditScreen extends Component{
         this.setState({wireframe:frame});
     }
 
+    onDragStop=(e, d) => {
+        let wireframe = this.state.wireframe;
+        let control = this.state.wireframe.selected;
+        control.xPos = d.x;
+        control.yPos = d.y;
+        this.setState({ wireframe: wireframe });
+    }
+
+    onResizeStop=(e, direction, ref, delta, position) => {
+        let wireframe = this.state.wireframe;
+        let control = this.state.wireframe.selected;
+        control.width = ref.style.width;
+        control.height = ref.style.height;
+        control.xPos = position.x;
+        control.yPos = position.y;
+        this.setState({
+          wireframe: wireframe
+        });
+        console.log(e);
+    }
+
+    duplicate = (e) => {
+        e.preventDefault();
+        let wireframe = this.state.wireframe;
+        if(e.ctrlKey && (e.keyCode == 68 || e.keyCode == 100) && wireframe.selected){
+            e.preventDefault();
+            let newControl = JSON.parse(JSON.stringify(wireframe.selected));
+            let len = wireframe.controls.length==0 ? 0 : wireframe.controls[wireframe.controls.length-1].key + 1;
+            newControl.xPos += 100;
+            newControl.yPos += 100;
+            newControl.key = len;
+            wireframe.controls.push(newControl);
+            this.setState({wireframe: wireframe})
+        }
+        else if((e.keyCode == 8 || e.keyCode == 127) && wireframe.selected){
+            e.preventDefault();
+            let skey = wireframe.selected.key;
+            let controls = wireframe.controls.filter(control => control.key !== skey);
+            wireframe.selected = null;
+            wireframe.controls = controls;
+            console.log(this.state.wireframe);
+            this.setState({wireframe: wireframe});
+        }
+    }
+
+    // deleteControl = (e) => {
+    //     let wireframe = this.state.wireframe;
+    //     if((e.keyCode == 8 || e.keyCode == 127)&& wireframe.selected){
+    //         e.preventDefault();
+    //         this.fixControlsKey(wireframe);
+    //         let skey = wireframe.selected.key;
+    //         console.log(wireframe.controls);
+    //         let controls = wireframe.controls.filter(control => control.key !== skey);
+    //         console.log(controls);
+    //         wireframe.selected = null;
+    //         wireframe.controls = controls;
+    //         this.fixControlsKey(wireframe);
+    //         this.setState({wireframe: wireframe});
+    //     }
+    // }
+
+    select = (e) =>{
+        let id = e.target.id;
+        let wireframe = this.state.wireframe;
+        if(id === 'canvas'){
+            wireframe.selected = null;
+            console.log("noooo selected");
+            this.setState({wireframe: wireframe});
+        }else{
+            let index = this.findControl(id);
+            console.log(index);
+            wireframe.selected = wireframe.controls[index];
+            console.log("selected" + wireframe.selected.key);
+            this.setState({wireframe:wireframe});
+        }
+        console.log(wireframe.selected)
+    }
     render(){
         if(!this.props.wireframe){
             return <React.Fragment/>;
@@ -162,13 +289,16 @@ class EditScreen extends Component{
                             <h4>{this.props.wireframe.name}</h4>
                         </div>
                         <div id='work-place'>
-                            <div className='' id='canvas' style={{width:this.state.wireframe.width, height:this.state.wireframe.height}}>
+                            <div className='' tabIndex='0' id='canvas' style={{width:this.state.wireframe.width, height:this.state.wireframe.height}} onMouseDown={this.select} onKeyDown={this.duplicate}>
                                 {this.state.wireframe.controls.map(c => this.createElement(c))}
                             </div>
                         </div>
                     </div>
 
-                    <RightControl />
+                    <RightControl 
+                        selected={this.state.wireframe.selected}
+                    
+                    />
                 </div>
             </div>
         )
