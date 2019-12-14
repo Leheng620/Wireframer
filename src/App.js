@@ -7,7 +7,6 @@ import { firebaseConnect } from 'react-redux-firebase';
 import Navbar from './components/navbar/Navbar.js';
 import RegisterScreen from './components/register_screen/RegisterScreen.js';
 import LoginScreen from './components/login_screen/LoginScreen.js';
-import WelcomeScreen from './components/welcome_screen/WelcomeScreen';
 import HomeScreen from './components/home_screen/HomeScreen.js';
 import DatabaseTester from './test/DatabaseTester'
 import EditScreen from './components/edit_screen/EditScreen.js';
