@@ -83,6 +83,7 @@ input[type=number]:not(.browser-default){
   text-align: center;
   padding: 3%;
   width: 100%;
+  overflow: hidden;
 }
 .wireframe-option-control-button{
   position: relative;
@@ -91,9 +92,15 @@ input[type=number]:not(.browser-default){
   width: 50px;
   text-align: center;
   padding: 0;
-  margin-right: 4%;
+  margin-right: 2%;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+#wireframe-option-control-zoom-in, #wireframe-option-control-zoom-out{
+  text-align: center;
+  margin-left: 2px;
+  box-shadow: none;
+  padding: 0px 2px;
 }
 .dimension-control-panel{
   display: inline-block;
@@ -152,6 +159,18 @@ input[type=number]:not(.browser-default){
 
 
 /* the work place */
+#name-field{
+  text-align: center;
+  border: none;
+  font-size: 300%;
+  width: 100%;
+  border:ridge;
+  border-color: black;
+  border-width: 3px;
+}
+#name-field:focus{
+  border-color: #6eb6e6;
+}
 #work-place{
   height: 90%;
   overflow: auto;
@@ -163,6 +182,7 @@ input[type=number]:not(.browser-default){
   border:groove;
   border-color: #fff333;
   position: relative;
+  transform-origin: 0 0;
 }
 .top-right-box{
   width: 10px;

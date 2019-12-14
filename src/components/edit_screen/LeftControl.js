@@ -41,8 +41,12 @@ class LeftControl extends Component{
                 <div className='wireframe-option-panel grey'>
                     <Button className='wireframe-option-control-button' id='wireframe-option-control-save'>Save</Button>
                     <Button className='wireframe-option-control-button' id='wireframe-option-control-close'>close</Button>
-                    <Button className='wireframe-option-control-button'>+</Button>
-                    <Button className='wireframe-option-control-button'>-</Button>
+                    <Button className='wireframe-option-control-button' id='wireframe-option-control-zoom-in' onClick={this.props.zoomIn} >
+                        <img src={require("../../images/zoom-in.png")} />
+                    </Button>
+                    <Button className='wireframe-option-control-button' id='wireframe-option-control-zoom-out' onClick={this.props.zoomOut} >
+                        <img src={require("../../images/zoom-out.png")} />
+                    </Button>
                 </div>
                 <div className='dimension-control-panel'>
                     <div style={{marginTop:'5px',textAlign:'center', paddingTop:'3%'}} >

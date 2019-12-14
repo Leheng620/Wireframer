@@ -13,6 +13,7 @@ import { Rnd } from "react-rnd";
 class EditScreen extends Component{
     state = {
         wireframe: JSON.parse(JSON.stringify(this.props.wireframe)),
+        scale: 1
     }
 
     fixKey = (auth,wireframeLists) => {
@@ -59,7 +60,7 @@ class EditScreen extends Component{
                 // bounds={{top: topLimit, left: leftLimit, right: rightLimit, bottom: downLimit}}
                 <Rnd key={component.key} default={{x: component.xPos, y: component.yPos, width:component.width, height:component.height}} 
                     bounds='parent' onDragStop={this.onDragStop} onResizeStop={this.onResizeStop}
-                    enableResizing={{ top:false, right:false, bottom:false, left:false, topRight:!hidden, bottomRight:!hidden, bottomLeft:!hidden, topLeft:!hidden }} >
+                    enableResizing={{ top:false, right:false, bottom:false, left:false, topRight:!hidden, bottomRight:!hidden, bottomLeft:!hidden, topLeft:!hidden }} scale={this.state.scale} >
                     
                     <div id={component.key} 
                         style={{width:'100%', height:'100%', borderStyle:'solid',
@@ -86,7 +87,7 @@ class EditScreen extends Component{
             return (
                 <Rnd key={component.key} default={{x: component.xPos, y: component.yPos, width:component.width, height:component.height}} 
                 bounds='parent' onDragStop={this.onDragStop} onResizeStop={this.onResizeStop}
-                enableResizing={{ top:false, right:false, bottom:false, left:false, topRight:!hidden, bottomRight:!hidden, bottomLeft:!hidden, topLeft:!hidden }}>
+                enableResizing={{ top:false, right:false, bottom:false, left:false, topRight:!hidden, bottomRight:!hidden, bottomLeft:!hidden, topLeft:!hidden }} scale={this.state.scale} >
 
                     <div id={component.key}
                         style={{width:'100%', height:'100%', borderStyle:'solid',
@@ -113,7 +114,7 @@ class EditScreen extends Component{
             return (
                 <Rnd key={component.key} default={{x: component.xPos, y: component.yPos, width:component.width, height:component.height}} 
                 bounds='parent' onDragStop={this.onDragStop} onResizeStop={this.onResizeStop}
-                enableResizing={{ top:false, right:false, bottom:false, left:false, topRight:!hidden, bottomRight:!hidden, bottomLeft:!hidden, topLeft:!hidden }}>
+                enableResizing={{ top:false, right:false, bottom:false, left:false, topRight:!hidden, bottomRight:!hidden, bottomLeft:!hidden, topLeft:!hidden }} scale={this.state.scale} >
                     
                     <button id={component.key} className='default'
                         style={{width:'100%', height:'100%', cursor:'move',borderStyle:'solid',
@@ -141,7 +142,7 @@ class EditScreen extends Component{
                 
                 <Rnd key={component.key} default={{x: component.xPos, y: component.yPos, width:component.width, height:component.height}} 
                 bounds='parent' onDragStop={this.onDragStop} onResizeStop={this.onResizeStop}
-                enableResizing={{ top:false, right:false, bottom:false, left:false, topRight:!hidden, bottomRight:!hidden, bottomLeft:!hidden, topLeft:!hidden }}>
+                enableResizing={{ top:false, right:false, bottom:false, left:false, topRight:!hidden, bottomRight:!hidden, bottomLeft:!hidden, topLeft:!hidden }} scale={this.state.scale} >
                     
                     <input className='browser-default' id={component.key} readOnly
                         style={{width:'100%', height:'100%', cursor:'move', borderStyle:'solid',
@@ -268,6 +269,30 @@ class EditScreen extends Component{
         this.setState({wireframe: wireframe})
     }
 
+    zoomIn = () =>{
+        let scale = this.state.scale;
+        scale *= 2;
+        this.setState({scale: scale});
+    }
+
+    zoomOut = () =>{
+        let scale = this.state.scale;
+        scale /= 2;
+        this.setState({scale: scale});
+    }
+
+    changeName = (e) =>{
+        let wireframe = this.state.wireframe;
+        if(e.target.value.trim() !== ""){
+            wireframe.name = e.target.value;
+        }else{
+            wireframe.name = "Unknown";
+        }
+        console.log(e.target.value);
+        console.log(wireframe.name);
+        this.setState({wireframe: wireframe});
+    }
+
     select = (e) =>{
         let id = e.target.id;
         let wireframe = this.state.wireframe;
@@ -293,7 +318,7 @@ class EditScreen extends Component{
             this.fixKey(this.props.auth, this.props.wireframeLists);
             return <React.Fragment/>;
         }
-        
+        let scale = this.state.scale;
         return(
             <div className='edit-screen-container'>
                 <div className='wireframe-container'>
@@ -301,14 +326,19 @@ class EditScreen extends Component{
                         wireframe={this.state.wireframe}
                         updateDimension={this.updateDimension}
                         addControl={this.addControl}
+                        zoomIn={this.zoomIn}
+                        zoomOut={this.zoomOut}
                     />
 
                     <div className='wireframe-panel control-panel white'>
-                        <div style={{textAlign:'center',border:'solid'}}>
-                            <h4>{this.props.wireframe.name}</h4>
+                        <div style={{textAlign:'center'}}>
+                            <input id='name-field' className="browser-default" type='text' value={this.state.wireframe.name} onChange={this.changeName} />
                         </div>
                         <div id='work-place'>
-                            <div className='' tabIndex='0' id='canvas' style={{width:this.state.wireframe.width, height:this.state.wireframe.height}} onMouseDown={this.select} onKeyDown={this.duplicate}>
+                            <div className='' tabIndex='0' id='canvas' 
+                                style={{width:this.state.wireframe.width, height:this.state.wireframe.height, transform:'scale('+Number(scale)+')'}} 
+                                onMouseDown={this.select} onKeyDown={this.duplicate}>
+                                
                                 {this.state.wireframe.controls.map(c => this.createElement(c))}
                             </div>
                         </div>
