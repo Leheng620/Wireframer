@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button } from 'react-materialize';
+import { Modal,Button } from 'react-materialize';
 
 class LeftControl extends Component{
 
@@ -8,7 +8,7 @@ class LeftControl extends Component{
         width: this.props.wireframe.width,
         height: this.props.wireframe.height,
         widthError: false,
-        heightError: false
+        heightError: false,
     }
 
     handleWidthChange = (e) => {
@@ -35,12 +35,35 @@ class LeftControl extends Component{
         }
     }
 
+    triggerClosingDialog = () => {
+        if(!this.props.save){
+            return (
+                <Modal 
+                    actions={[
+                    <Button className="red" modal="close" onClick={this.props.handleClose} style={{marginRight:'10px'}}>Confirm</Button>,
+                    <Button modal="close" >cancel</Button>]}
+                    trigger={<Button className='wireframe-option-control-button' id='wireframe-option-control-close'>close</Button>
+                }
+                    header="Go back to home page without saving?"
+                    >
+                    <strong style={{fontSize:"X-large"}}>You have work that has not been saved, exit anyways?</strong>
+                    <br/>
+                    <strong style={{fontSize:"x-large",fontWeight:'bolder'}}>All changes will be gone.</strong>
+                </Modal>
+            )
+        }else{
+            return (
+                <Button className='wireframe-option-control-button' id='wireframe-option-control-close' onClick={this.props.handleClose} >close</Button>
+            )
+        }
+    }
+
     render(){
         return(
             <div className='control-panel white'>
                 <div className='wireframe-option-panel grey'>
-                    <Button className='wireframe-option-control-button' id='wireframe-option-control-save'>Save</Button>
-                    <Button className='wireframe-option-control-button' id='wireframe-option-control-close'>close</Button>
+                    <Button className='wireframe-option-control-button' id='wireframe-option-control-save' disabled={this.props.save} onClick={this.props.handleSave} >Save</Button>
+                    {this.triggerClosingDialog()}
                     <Button className='wireframe-option-control-button' id='wireframe-option-control-zoom-in' onClick={this.props.zoomIn} >
                         <img src={require("../../images/zoom-in.png")} />
                     </Button>

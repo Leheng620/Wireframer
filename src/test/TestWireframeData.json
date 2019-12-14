@@ -3,7 +3,6 @@
         {
             "key": 0,
             "name": "My Dumb App",
-			"selected": null,
 			"width": 400,
 			"height": 400,
             "controls": [
@@ -72,7 +71,6 @@
         {
             "key": 1,
             "name": "My Homepage",
-			"selected": null,
 			"width": 400,
 			"height": 500,
             "controls": [
@@ -141,7 +139,6 @@
 		{
             "key": 2,
             "name": "CSE316Homepage",
-			"selected": 1,
 			"width": 500,
 			"height": 400,
             "controls": [

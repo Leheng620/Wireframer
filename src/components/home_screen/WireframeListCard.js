@@ -17,8 +17,8 @@ class WireframeListCard extends React.Component {
                 </div>
                 <Modal 
                     actions={[
-                    <Button className="red" modal="close" onClick={(e) => this.props.delete(wireframeList.key, e)} style={{marginRight:'10px'}}>Confirm</Button>,
-                    <Button modal="close" onClick={this.stop}>cancel</Button>]}
+                    <Button className="red" modal="close" onClick={(e) => this.props.delete(wireframeList.key, e)} style={{marginRight:'10px',width:'100px'}}>Confirm</Button>,
+                    <Button modal="close" onClick={this.stop} style={{width:'100px'}} >cancel</Button>]}
                     trigger={<Button node="button" onClick={this.stop}>Delete</Button>}
                     header="Delete wireframe?"
                 >

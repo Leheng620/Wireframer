@@ -13,7 +13,9 @@ import { Rnd } from "react-rnd";
 class EditScreen extends Component{
     state = {
         wireframe: JSON.parse(JSON.stringify(this.props.wireframe)),
-        scale: 1
+        scale: 1,
+        save: true,
+        selected : null,
     }
 
     fixKey = (auth,wireframeLists) => {
@@ -38,7 +40,7 @@ class EditScreen extends Component{
     }
 
     createElement = (component) =>{
-        const selected = this.state.wireframe.selected;
+        const selected = this.state.selected;
         let selectedKey;
         let hidden;
         if(selected){
@@ -162,7 +164,7 @@ class EditScreen extends Component{
         let wireframe = this.state.wireframe;
         wireframe.width = Number(w);
         wireframe.height = Number(h);
-        this.setState({wireframe: wireframe});
+        this.setState({wireframe: wireframe, save: false});
     }
 
     addControl = (type,prop,w,h,backgroundColor,borderColor,br,bt) =>{
@@ -186,55 +188,61 @@ class EditScreen extends Component{
         }
         controls.push(newControl);
         console.log(controls);
-        this.setState({wireframe:frame});
+        this.setState({wireframe:frame, save: false});
     }
 
     onDragStop=(e, d) => {
         let wireframe = this.state.wireframe;
-        let control = this.state.wireframe.selected;
-        control.xPos = d.x;
-        control.yPos = d.y;
-        this.setState({ wireframe: wireframe });
+        let control = this.state.selected;
+        let same = (control.xPos == d.x) && (control.yPos == d.y) ? true : false;
+        if(!same){
+            control.xPos = d.x;
+            control.yPos = d.y;
+            console.log('fuck')
+            this.setState({ wireframe: wireframe ,save: false});
+        }
     }
 
     onResizeStop=(e, direction, ref, delta, position) => {
         let wireframe = this.state.wireframe;
-        let control = this.state.wireframe.selected;
-        control.width = ref.style.width.slice(0,ref.style.width.indexOf('p'));
-        control.height = ref.style.height.slice(0,ref.style.width.indexOf('p'));
-        control.xPos = position.x;
-        control.yPos = position.y;
-        this.setState({
-          wireframe: wireframe
-        });
-        console.log(e);
+        let control = this.state.selected;
+        let same = (control.xPos == position.x) && (control.yPos == position.y) &&
+         (control.width == ref.style.width.slice(0,ref.style.width.indexOf('p'))) && 
+         (control.height == ref.style.height.slice(0,ref.style.height.indexOf('p'))) ? true : false;
+        if(!same){
+            control.width = ref.style.width.slice(0,ref.style.width.indexOf('p'));
+            control.height = ref.style.height.slice(0,ref.style.height.indexOf('p'));
+            control.xPos = position.x;
+            control.yPos = position.y;
+            this.setState({
+            wireframe: wireframe,
+            save: false
+            });
+        }
     }
 
     duplicate = (e) => {
         e.preventDefault();
         let wireframe = this.state.wireframe;
         console.log(e.keyCode)
-        if(e.ctrlKey && e.keyCode == 68 && wireframe.selected){
+        if(e.ctrlKey && e.keyCode == 68 && this.state.selected){
             e.preventDefault();
-            let newControl = JSON.parse(JSON.stringify(wireframe.selected));
+            let newControl = JSON.parse(JSON.stringify(this.state.selected));
             let len = wireframe.controls.length==0 ? 0 : wireframe.controls[wireframe.controls.length-1].key + 1;
             newControl.xPos += (newControl.xPos-100)<0 ? 100 : 
                 (newControl.xPos+100+newControl.width>wireframe.width) ? -100: 100;
             newControl.yPos += (newControl.yPos-100)<0 ? 100 : 
                 (newControl.yPos + 100 + newControl.height > wireframe.height) ? -100: 100;;
             newControl.key = len;
-            wireframe.selected = newControl;
             wireframe.controls.push(newControl);
-            this.setState({wireframe: wireframe})
+            this.setState({wireframe: wireframe, save: false, selected: newControl})
         }
-        else if((e.keyCode == 8 || e.keyCode == 46) && wireframe.selected){
+        else if((e.keyCode == 8 || e.keyCode == 46) && this.state.selected){
             e.preventDefault();
-            let skey = wireframe.selected.key;
+            let skey = this.state.selected.key;
             let controls = wireframe.controls.filter(control => control.key !== skey);
-            wireframe.selected = null;
             wireframe.controls = controls;
-            console.log(this.state.wireframe);
-            this.setState({wireframe: wireframe});
+            this.setState({wireframe: wireframe, save: false, selected: null});
         }
     }
 
@@ -256,17 +264,18 @@ class EditScreen extends Component{
 
     changeProperties = (property, value) => {
         let wireframe = this.state.wireframe;
+        let selected = this.state.selected;
         switch(property){
-            case 'prop': wireframe.selected.prop = value; break;
-            case 'fontSize': wireframe.selected.fontSize = value; break;
-            case 'textColor': wireframe.selected.textColor = value; break;
-            case 'backgroundColor': wireframe.selected.backgroundColor = value; break;
-            case 'borderColor': wireframe.selected.borderColor = value; break;
-            case 'borderThickness': wireframe.selected.borderThickness = value; break;
-            case 'borderRadius': wireframe.selected.borderRadius = value; break;
+            case 'prop': selected.prop = value; break;
+            case 'fontSize': selected.fontSize = value; break;
+            case 'textColor': selected.textColor = value; break;
+            case 'backgroundColor': selected.backgroundColor = value; break;
+            case 'borderColor': selected.borderColor = value; break;
+            case 'borderThickness': selected.borderThickness = value; break;
+            case 'borderRadius': selected.borderRadius = value; break;
             default :
         }
-        this.setState({wireframe: wireframe})
+        this.setState({wireframe: wireframe, save: false})
     }
 
     zoomIn = () =>{
@@ -290,24 +299,35 @@ class EditScreen extends Component{
         }
         console.log(e.target.value);
         console.log(wireframe.name);
-        this.setState({wireframe: wireframe});
+        this.setState({wireframe: wireframe, save: false});
+    }
+
+    handleClose = () => {
+        this.props.history.goBack();
+        this.fixKey(this.props.auth, this.props.wireframeLists);
+    }
+
+    handleSave = () => {
+        this.setState({save: true});
+        let wireframeLists = this.props.wireframeLists;
+        let key = this.state.wireframe.key;
+        wireframeLists[key] = this.state.wireframe;
+        getFirestore().collection('users').doc(this.props.auth.uid).update({
+            wireframeLists: wireframeLists
+        })
+        
     }
 
     select = (e) =>{
         let id = e.target.id;
         let wireframe = this.state.wireframe;
         if(id === 'canvas'){
-            wireframe.selected = null;
             console.log("noooo selected");
-            this.setState({wireframe: wireframe});
+            this.setState({selected: null});
         }else{
             let index = this.findControl(id);
-            console.log(index);
-            wireframe.selected = wireframe.controls[index];
-            console.log("selected" + wireframe.selected.key);
-            this.setState({wireframe:wireframe});
+            this.setState({selected:wireframe.controls[index] });
         }
-        console.log(wireframe.selected)
     }
     render(){
         if(!this.props.wireframe){
@@ -328,6 +348,9 @@ class EditScreen extends Component{
                         addControl={this.addControl}
                         zoomIn={this.zoomIn}
                         zoomOut={this.zoomOut}
+                        handleClose={this.handleClose}
+                        handleSave={this.handleSave}
+                        save={this.state.save}
                     />
 
                     <div className='wireframe-panel control-panel white'>
@@ -345,7 +368,7 @@ class EditScreen extends Component{
                     </div>
 
                     <RightControl 
-                        selected={this.state.wireframe.selected}
+                        selected={this.state.selected}
                         changeProperties={this.changeProperties}
                     />
                 </div>
