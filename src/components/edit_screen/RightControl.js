@@ -26,7 +26,7 @@ class RightControl extends Component{
         let selected = this.props.selected;
         let isSelected = selected ? true : false;
         return(
-            <div className='control-panel white'>
+            <div className='control-panel'>
                 <div className='property-panel'>
                     <div>
                         <div className='left'>Properties</div>

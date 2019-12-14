@@ -21,6 +21,7 @@ body {
 div.banner {
   padding: 20px;
   margin-top: 60px;
+  overflow-wrap: break-word;
 }
 
 form {
@@ -52,6 +53,15 @@ input[type=number]:not(.browser-default){
   height: 2rem;
 }
 
+.material-icons{
+  font-family: unset;
+}
+
+nav{
+  height: 56px;
+  line-height: 56px;
+}
+
 /* HomeScreen */
 /* EditScreen */
 .edit-screen-container{
@@ -61,6 +71,7 @@ input[type=number]:not(.browser-default){
   left: 5%;    
   margin-top: 6px;
 }
+
 /* left, right and middle container */
 .control-panel{
   width: 20%;
@@ -148,8 +159,10 @@ input[type=number]:not(.browser-default){
   border-radius: 50%;
   height: 30px;
   width: 30px;
-  border: none;
   outline: none;
+  border: solid;
+  border-width: 1px;
+  border-color: black;
 }
 
 /* #prop:focus {

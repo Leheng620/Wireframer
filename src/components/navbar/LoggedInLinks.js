@@ -4,12 +4,25 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { firebaseConnect } from 'react-redux-firebase';
 import { logoutHandler } from '../../store/database/asynchHandler'
+import { getFirestore } from 'redux-firestore';
 
 class LoggedInLinks extends React.Component {
+
+  fixKey = (uid,wireframeLists) => {
+    let newWireframeLists = wireframeLists;
+    for(let i = 0; i < newWireframeLists.length; i++){
+      newWireframeLists[i].key = i;
+    }
+    getFirestore().collection('users').doc(uid).update({
+      wireframeLists: newWireframeLists
+    })
+  }
 
   // As in SignIn.jsx we need to use a function that gets as an argument firebase object
   handleLogout = () => {
     const { firebase } = this.props;
+    let wireframeLists = this.props.profile.wireframeLists;
+    this.fixKey(this.props.uid,wireframeLists);
     this.props.signOut(firebase);
   }
 

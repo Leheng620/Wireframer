@@ -311,7 +311,7 @@ class EditScreen extends Component{
         this.setState({save: true});
         let wireframeLists = this.props.wireframeLists;
         let key = this.state.wireframe.key;
-        wireframeLists[key] = this.state.wireframe;
+        wireframeLists[0] = this.state.wireframe;
         getFirestore().collection('users').doc(this.props.auth.uid).update({
             wireframeLists: wireframeLists
         })
@@ -339,6 +339,7 @@ class EditScreen extends Component{
             return <React.Fragment/>;
         }
         let scale = this.state.scale;
+        document.getElementById('go-home').setAttribute('hidden',true);
         return(
             <div className='edit-screen-container'>
                 <div className='wireframe-container'>
@@ -353,9 +354,9 @@ class EditScreen extends Component{
                         save={this.state.save}
                     />
 
-                    <div className='wireframe-panel control-panel white'>
+                    <div className='wireframe-panel control-panel'>
                         <div style={{textAlign:'center'}}>
-                            <input id='name-field' className="browser-default" type='text' value={this.state.wireframe.name} onChange={this.changeName} />
+                            <input id='name-field' className="browser-default" type='text' style={{backgroundColor:'rgba(219, 235, 241, 0.507)'}} value={this.state.wireframe.name} onChange={this.changeName} />
                         </div>
                         <div id='work-place'>
                             <div className='' tabIndex='0' id='canvas' 

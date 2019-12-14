@@ -12,7 +12,7 @@ class HomeScreen extends Component {
     administrator = () => {
         if(this.props.profile.admin){
             return (
-                <NavLink to="/databaseTester">Database Tester</NavLink>
+                <NavLink to="/databaseTester"><Button style={{marginTop:'10px'}}>Database Tester</Button></NavLink>
             );
         }else{
             return null;
@@ -25,9 +25,8 @@ class HomeScreen extends Component {
         let list = {
             "key": 0,
             "name": "Unknown",
-            "selected": null,
-            "width":400,
-            "height":400,
+            "width":500,
+            "height":500,
             "controls": []
         };
         wireframeLists.splice(0, 0, list);
@@ -68,16 +67,16 @@ class HomeScreen extends Component {
                     </div>
                     <div className="col s8">
                         <div className="banner">
-                            @todo<br />
-                            List Maker
+                            Wireframer<sup style={{top:'-1em'}}>TM</sup><br /><br/>
                         </div>
                         <div className="home_new_list_container" style={{paddingTop:'5px'}}>
-                                <Button className="home_new_list_button" waves="light" large style={{height:'120px'}} onClick={this.createWireframe}>
+                                <Button className="home_new_list_button" waves="light" large style={{height:'120px',width:'100%'}} onClick={this.createWireframe}>
                                     Create a New Wireframe
                                 </Button>
                         </div>
+                        {this.administrator()}
                     </div>
-                    {this.administrator()}
+                    
                 </div>
             </div>
         );

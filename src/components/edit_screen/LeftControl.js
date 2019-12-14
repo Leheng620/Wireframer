@@ -60,8 +60,8 @@ class LeftControl extends Component{
 
     render(){
         return(
-            <div className='control-panel white'>
-                <div className='wireframe-option-panel grey'>
+            <div className='control-panel'>
+                <div className='wireframe-option-panel'>
                     <Button className='wireframe-option-control-button' id='wireframe-option-control-save' disabled={this.props.save} onClick={this.props.handleSave} >Save</Button>
                     {this.triggerClosingDialog()}
                     <Button className='wireframe-option-control-button' id='wireframe-option-control-zoom-in' onClick={this.props.zoomIn} >
@@ -93,16 +93,16 @@ class LeftControl extends Component{
                     </div>
                 </div>
                 <div className='controls-panel'>
-                    <div className='controls' onClick={()=>{this.props.addControl('container','',90,50,'#d8d8d8','#000000',2,2)}} >
-                        <div className='grey controls-component' style={{position:'relative',width:'90px',height:'50px'}}></div>
+                    <div className='controls' onClick={()=>{this.props.addControl('container','',90,50,'#ffffff','#000000',2,2)}} >
+                        <div className='white controls-component' style={{position:'relative',width:'90px',height:'50px',border:'solid',borderWidth:'2px'}}></div>
                         <div className='controls-prompt'>container</div>
                     </div>
-                    <div className='controls' onClick={()=>{this.props.addControl('label','Prompt for Input',120,20,'#ffffff','#000000',0,0)}}>
+                    <div className='controls' onClick={()=>{this.props.addControl('label','Prompt for Input',120,20,'unset','#000000',0,0)}}>
                         <div className='controls-component' style={{width:'60%',height:'5%'}} >Prompt for Input:</div>
                         <div className='controls-prompt'>Label</div>
                     </div>
-                    <div className='controls' onClick={()=>{this.props.addControl('button','Submit',85,36,'#bbb9b9','#000000',2,0)}}>
-                        <Button className='controls-component browser-default'>Submit</Button>
+                    <div className='controls' onClick={()=>{this.props.addControl('button','Submit',85,36,'#9dc1e2','#000000',1,1)}}>
+                        <Button className='controls-component'>Submit</Button>
                         <br />
                         <div className='controls-prompt'>Button</div>
                     </div>

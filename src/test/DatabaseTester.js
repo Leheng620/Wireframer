@@ -4,6 +4,9 @@ import wireframeJson from './TestWireframeData.json'
 import { getFirestore } from 'redux-firestore';
 import { firestore } from 'firebase';
 import { Redirect } from 'react-router-dom';
+import { Button } from 'react-materialize';
+import { Link } from 'react-router-dom';
+
 
 class DatabaseTester extends React.Component {
 
@@ -51,9 +54,15 @@ class DatabaseTester extends React.Component {
             return <Redirect to="/" />;
         }
         return (
-            <div>
-                <button onClick={this.handleClear}>Clear Database</button>
-                <button onClick={this.handleReset}>Reset Database</button>
+            <div style={{textAlign:'center'}}>
+                <div style={{textAlign:'center', width:'50%',height:'50%',position:'relative',display:'inline-block'}}>
+                    <Button onClick={this.handleClear} style={{margin:'10px'}}>Clear Database</Button>
+                    <Button onClick={this.handleReset} style={{margin:'10px'}}>Reset Database</Button>
+                </div>
+                
+                <div>
+                    <Link to="/"><Button>Go Back</Button></Link>
+                </div>
             </div>)
     }
 }
