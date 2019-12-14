@@ -63,10 +63,10 @@ class EditScreen extends Component{
                     
                     <div id={component.key} 
                         style={{width:'100%', height:'100%', borderStyle:'solid',
-                        borderRadius:component.borderRadius, borderWidth:component.borderThickness, borderColor:component.borderColor,
-                        fontSize:component.fontSize, color:component.textColor, backgroundColor:component.backgroundColor,
-                        }}>
-
+                        borderRadius:component.borderRadius+'px', borderWidth:component.borderThickness+'px', borderColor:component.borderColor,
+                        fontSize:component.fontSize+'px', color:component.textColor, backgroundColor:component.backgroundColor,
+                        overflow:'hidden'}}>
+                        {component.prop}
                     </div>
                     <div className="top-left-box" hidden={hidden}></div>
                     <div className="top-right-box" hidden={hidden}></div>
@@ -90,10 +90,10 @@ class EditScreen extends Component{
 
                     <div id={component.key}
                         style={{width:'100%', height:'100%', borderStyle:'solid',
-                        borderRadius:component.borderRadius, borderWidth:component.borderThickness, borderColor:component.borderColor,
-                        fontSize:component.fontSize, color:component.textColor, backgroundColor:component.backgroundColor,
-                        }}>
-                            Prompt for Input:
+                        borderRadius:component.borderRadius+'px', borderWidth:component.borderThickness+'px', borderColor:component.borderColor,
+                        fontSize:component.fontSize+'px', color:component.textColor, backgroundColor:component.backgroundColor,
+                        overflow:'hidden'}}>
+                            {component.prop}
                     </div>
                     <div className="top-left-box" hidden={hidden}></div>
                     <div className="top-right-box" hidden={hidden}></div>
@@ -116,11 +116,11 @@ class EditScreen extends Component{
                 enableResizing={{ top:false, right:false, bottom:false, left:false, topRight:!hidden, bottomRight:!hidden, bottomLeft:!hidden, topLeft:!hidden }}>
                     
                     <button id={component.key} className='default'
-                        style={{width:'100%', height:'100%', borderStyle:'solid',
-                        borderRadius:component.borderRadius, borderWidth:component.borderThickness, borderColor:component.borderColor,
-                        fontSize:component.fontSize, color:component.textColor, backgroundColor:component.backgroundColor,
-                        }}>
-                            Submit
+                        style={{width:'100%', height:'100%', cursor:'move',borderStyle:'solid',
+                        borderRadius:component.borderRadius+'px', borderWidth:component.borderThickness+'px', borderColor:component.borderColor,
+                        fontSize:component.fontSize+'px', color:component.textColor, backgroundColor:component.backgroundColor,
+                        overflow:'hidden'}}>
+                            {component.prop}
                     </button>
                     <div className="top-left-box" hidden={hidden}></div>
                     <div className="top-right-box" hidden={hidden}></div>
@@ -143,11 +143,11 @@ class EditScreen extends Component{
                 bounds='parent' onDragStop={this.onDragStop} onResizeStop={this.onResizeStop}
                 enableResizing={{ top:false, right:false, bottom:false, left:false, topRight:!hidden, bottomRight:!hidden, bottomLeft:!hidden, topLeft:!hidden }}>
                     
-                    <input className='browser-default' id={component.key}
-                        style={{width:'100%', height:'100%', borderStyle:'solid',
-                        borderRadius:component.borderRadius, borderWidth:component.borderThickness, borderColor:component.borderColor,
-                        fontSize:component.fontSize, color:component.textColor, backgroundColor:component.backgroundColor,
-                        }} type='text' placeholder='Input' /> 
+                    <input className='browser-default' id={component.key} readOnly
+                        style={{width:'100%', height:'100%', cursor:'move', borderStyle:'solid',
+                        borderRadius:component.borderRadius+'px', borderWidth:component.borderThickness+'px', borderColor:component.borderColor,
+                        fontSize:component.fontSize+'px', color:component.textColor, backgroundColor:component.backgroundColor,
+                        overflow:'hidden'}}defaultValue={component.prop} type='text' placeholder='Input' /> 
                     <div className="top-left-box" hidden={hidden}></div>
                     <div className="top-right-box" hidden={hidden}></div>
                     <div className="down-left-box" hidden={hidden}></div>
@@ -164,7 +164,7 @@ class EditScreen extends Component{
         this.setState({wireframe: wireframe});
     }
 
-    addControl = (type,w,h,backgroundColor,borderColor,br,bt) =>{
+    addControl = (type,prop,w,h,backgroundColor,borderColor,br,bt) =>{
         let frame = this.state.wireframe;
         let controls = frame.controls;
         let len = controls.length==0 ? 0 : controls[controls.length-1].key + 1;
@@ -179,7 +179,7 @@ class EditScreen extends Component{
             borderColor: borderColor,
             borderRadius: br,
             borderThickness: bt,
-            prop: type,
+            prop: prop,
             fontSize: 12,
             textColor: "#000000",
         }
@@ -199,8 +199,8 @@ class EditScreen extends Component{
     onResizeStop=(e, direction, ref, delta, position) => {
         let wireframe = this.state.wireframe;
         let control = this.state.wireframe.selected;
-        control.width = ref.style.width;
-        control.height = ref.style.height;
+        control.width = ref.style.width.slice(0,ref.style.width.indexOf('p'));
+        control.height = ref.style.height.slice(0,ref.style.width.indexOf('p'));
         control.xPos = position.x;
         control.yPos = position.y;
         this.setState({
@@ -212,17 +212,21 @@ class EditScreen extends Component{
     duplicate = (e) => {
         e.preventDefault();
         let wireframe = this.state.wireframe;
-        if(e.ctrlKey && (e.keyCode == 68 || e.keyCode == 100) && wireframe.selected){
+        console.log(e.keyCode)
+        if(e.ctrlKey && e.keyCode == 68 && wireframe.selected){
             e.preventDefault();
             let newControl = JSON.parse(JSON.stringify(wireframe.selected));
             let len = wireframe.controls.length==0 ? 0 : wireframe.controls[wireframe.controls.length-1].key + 1;
-            newControl.xPos += 100;
-            newControl.yPos += 100;
+            newControl.xPos += (newControl.xPos-100)<0 ? 100 : 
+                (newControl.xPos+100+newControl.width>wireframe.width) ? -100: 100;
+            newControl.yPos += (newControl.yPos-100)<0 ? 100 : 
+                (newControl.yPos + 100 + newControl.height > wireframe.height) ? -100: 100;;
             newControl.key = len;
+            wireframe.selected = newControl;
             wireframe.controls.push(newControl);
             this.setState({wireframe: wireframe})
         }
-        else if((e.keyCode == 8 || e.keyCode == 127) && wireframe.selected){
+        else if((e.keyCode == 8 || e.keyCode == 46) && wireframe.selected){
             e.preventDefault();
             let skey = wireframe.selected.key;
             let controls = wireframe.controls.filter(control => control.key !== skey);
@@ -248,6 +252,21 @@ class EditScreen extends Component{
     //         this.setState({wireframe: wireframe});
     //     }
     // }
+
+    changeProperties = (property, value) => {
+        let wireframe = this.state.wireframe;
+        switch(property){
+            case 'prop': wireframe.selected.prop = value; break;
+            case 'fontSize': wireframe.selected.fontSize = value; break;
+            case 'textColor': wireframe.selected.textColor = value; break;
+            case 'backgroundColor': wireframe.selected.backgroundColor = value; break;
+            case 'borderColor': wireframe.selected.borderColor = value; break;
+            case 'borderThickness': wireframe.selected.borderThickness = value; break;
+            case 'borderRadius': wireframe.selected.borderRadius = value; break;
+            default :
+        }
+        this.setState({wireframe: wireframe})
+    }
 
     select = (e) =>{
         let id = e.target.id;
@@ -297,7 +316,7 @@ class EditScreen extends Component{
 
                     <RightControl 
                         selected={this.state.wireframe.selected}
-                    
+                        changeProperties={this.changeProperties}
                     />
                 </div>
             </div>

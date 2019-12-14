@@ -47,6 +47,11 @@ input[type=password]:not(.browser-default):focus:not([readonly]) + label{
   color: #ec407a !important;
 }
 
+input[type=text]:not(.browser-default),
+input[type=number]:not(.browser-default){
+  height: 2rem;
+}
+
 /* HomeScreen */
 /* EditScreen */
 .edit-screen-container{
@@ -83,10 +88,12 @@ input[type=password]:not(.browser-default):focus:not([readonly]) + label{
   position: relative;
 }
 #wireframe-option-control-save, #wireframe-option-control-close{
-  width: 25%;
+  width: 50px;
   text-align: center;
   padding: 0;
   margin-right: 4%;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .dimension-control-panel{
   display: inline-block;
@@ -130,6 +137,19 @@ input[type=password]:not(.browser-default):focus:not([readonly]) + label{
 .properties{
   margin-top: 10%;
 }
+.color-picker{
+  border-radius: 50%;
+  height: 30px;
+  width: 30px;
+  border: none;
+  outline: none;
+}
+
+/* #prop:focus {
+  border-bottom: 1px solid #fff333;
+  box-shadow: 0 1px 0 0 #000;
+} */
+
 
 /* the work place */
 #work-place{
@@ -176,3 +196,4 @@ input[type=password]:not(.browser-default):focus:not([readonly]) + label{
   position: absolute;
   background-color: black;
 }
+

@@ -66,21 +66,21 @@ class LeftControl extends Component{
                     </div>
                 </div>
                 <div className='controls-panel'>
-                    <div className='controls' onClick={()=>{this.props.addControl('container',90,50,'#d8d8d8','#000000',2,2)}} >
+                    <div className='controls' onClick={()=>{this.props.addControl('container','',90,50,'#d8d8d8','#000000',2,2)}} >
                         <div className='grey controls-component' style={{position:'relative',width:'90px',height:'50px'}}></div>
                         <div className='controls-prompt'>container</div>
                     </div>
-                    <div className='controls' onClick={()=>{this.props.addControl('label',120,20,'#ffffff','#000000',0,0)}}>
+                    <div className='controls' onClick={()=>{this.props.addControl('label','Prompt for Input',120,20,'#ffffff','#000000',0,0)}}>
                         <div className='controls-component' style={{width:'60%',height:'5%'}} >Prompt for Input:</div>
                         <div className='controls-prompt'>Label</div>
                     </div>
-                    <div className='controls' onClick={()=>{this.props.addControl('button',85,36,'#bbb9b9','#000000',2,0)}}>
+                    <div className='controls' onClick={()=>{this.props.addControl('button','Submit',85,36,'#bbb9b9','#000000',2,0)}}>
                         <Button className='controls-component browser-default'>Submit</Button>
                         <br />
                         <div className='controls-prompt'>Button</div>
                     </div>
-                    <div className='controls' onClick={()=>{this.props.addControl('textfield',90,23,'#ffffff','#000000',0,1)}}>
-                        <input className='browser-default controls-component' style={{width:'60%'}} type='text' placeholder='Input' />
+                    <div className='controls' onClick={()=>{this.props.addControl('textfield','',90,23,'#ffffff','#000000',0,1)}}>
+                        <input className='browser-default controls-component' style={{width:'60%',cursor:'pointer'}} type='text' disabled placeholder='Input' />
                         <div className='controls-prompt'>Textfield</div>
                     </div>
                 </div>
