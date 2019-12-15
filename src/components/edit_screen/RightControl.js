@@ -30,12 +30,12 @@ class RightControl extends Component{
                 <div className='property-panel'>
                     <div>
                         <div className='left'>Properties</div>
-                        <input id="prop" className='properties-text-field' type='text' disabled={!isSelected} value={isSelected ? selected.prop : ""} onChange={this.change} />
+                        <input id="prop" className='properties-text-field' type='text' disabled={!isSelected||selected.type=='container'} value={isSelected ? selected.prop : ""} onChange={this.change} />
                     </div>
                     <div className='properties'>
                         <span>Font Size:</span>
                         <input id="fontSize" className='properties-text-field' type='number' size='10' 
-                            disabled={!isSelected} value={isSelected ? selected.fontSize : ""} onChange={this.change}
+                            disabled={!isSelected||selected.type=='container'} value={isSelected ? selected.type=='container'? "" : selected.fontSize : ""} onChange={this.change}
                         />
                     </div>
 
@@ -43,7 +43,7 @@ class RightControl extends Component{
                         <span>Text Color:</span>
                         <span id='textColor-span' className='color-picker right' style={{backgroundColor:isSelected ? selected.textColor : "#000000", cursor:'pointer'}} onClick={this.clickColorPicker} ></span>
                         <a className='right' style={{color:isSelected ? selected.textColor : "#000000"}}>{isSelected ? selected.textColor : "#000000"}&nbsp;</a>
-                        <input id="textColor" className='right' type='color' hidden disabled={!isSelected} value={isSelected ? selected.textColor : "#000000"} onChange={this.change} />
+                        <input id="textColor" className='right' type='color' hidden disabled={!isSelected||selected.type=='container'} value={isSelected ? selected.textColor : "#000000"} onChange={this.change} />
                     </div>
 
                     <div className='properties'>
