@@ -9,6 +9,8 @@ export const loginHandler = ({ credentials, firebase }) => (dispatch, getState) 
       dispatch({ type: 'LOGIN_SUCCESS' });
     }).catch((err) => {
       dispatch({ type: 'LOGIN_ERROR', err });
+      let type = err.code.split('/')[1];
+      document.getElementById('login-error').innerHTML=type;
     });
   };
 
