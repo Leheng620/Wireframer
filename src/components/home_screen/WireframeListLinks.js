@@ -24,7 +24,7 @@ class WireframeListLinks extends React.Component {
         return (
             <div className="todo-lists section">
                 {wireframeLists && wireframeLists.map(wireframeList => (
-                    <Link onClick={()=>this.moveToTop(wireframeList)} to={'/wireframe/'+id+'/'+wireframeList.key} key={wireframeList.key}>
+                    <Link onClick={()=>this.moveToTop(wireframeList)} to={'/Wireframer/'+id+'/'+wireframeList.key} key={wireframeList.key}>
                         <WireframeListCard wireframeList={wireframeList} delete={this.props.delete} />
                     </Link>
                 ))}

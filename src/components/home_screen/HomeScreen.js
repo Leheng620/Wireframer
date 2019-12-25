@@ -12,7 +12,7 @@ class HomeScreen extends Component {
     administrator = () => {
         if(this.props.profile.admin){
             return (
-                <NavLink to="/databaseTester"><Button style={{marginTop:'10px'}}>Database Tester</Button></NavLink>
+                <NavLink to={"/Wireframer/"+this.props.auth.uid+"/databaseTester"}><Button style={{marginTop:'10px'}}>Database Tester</Button></NavLink>
             );
         }else{
             return null;
@@ -31,7 +31,7 @@ class HomeScreen extends Component {
         };
         wireframeLists.splice(0, 0, list);
         this.fixKey(wireframeLists);
-        this.props.history.push({pathname: "/wireframe/"+id + "/"+list.key});
+        this.props.history.push({pathname: ""+id + "/"+list.key});
         getFirestore().collection('users').doc(id).update({
             wireframeLists: wireframeLists
         })
@@ -57,10 +57,12 @@ class HomeScreen extends Component {
 
     render() {
         if (!this.props.auth.uid) {
-            return <Redirect to="/login" />;
+            return <Redirect to="/Wireframer/login" />;
         }
+        
         return (
             <div className="dashboard container">
+                <Redirect to={"/Wireframer/"+this.props.auth.uid} />
                 <div className="row">
                     <div className="col s12 m4">
                         <WireframeListLinks delete={this.deleteWireframe} />

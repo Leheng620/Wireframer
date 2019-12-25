@@ -2,7 +2,6 @@ import React from 'react'
 import { connect } from 'react-redux';
 import wireframeJson from './TestWireframeData.json'
 import { getFirestore } from 'redux-firestore';
-import { firestore } from 'firebase';
 import { Redirect } from 'react-router-dom';
 import { Button } from 'react-materialize';
 import { Link } from 'react-router-dom';
@@ -51,7 +50,7 @@ class DatabaseTester extends React.Component {
 
     render() {
         if (!this.props.auth.uid || !this.props.profile.admin) {
-            return <Redirect to="/" />;
+            return <Redirect to="/Wireframer/login" />;
         }
         return (
             <div style={{textAlign:'center'}}>
@@ -61,7 +60,7 @@ class DatabaseTester extends React.Component {
                 </div>
                 
                 <div>
-                    <Link to="/"><Button>Go Back</Button></Link>
+                    <Link to={"/Wireframer/"+this.props.auth.uid}><Button>Go Back</Button></Link>
                 </div>
             </div>)
     }

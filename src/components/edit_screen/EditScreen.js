@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { firestoreConnect } from 'react-redux-firebase';
 import { getFirestore } from 'redux-firestore';
-import { Button } from 'react-materialize';
 import LeftControl from './LeftControl';
 import RightControl from './RightControl';
 import { Rnd } from "react-rnd";
@@ -340,6 +339,13 @@ class EditScreen extends Component{
         }
         let scale = this.state.scale;
         document.getElementById('go-home').setAttribute('hidden',true);
+
+        let path = this.props.history.location.pathname;
+        path = path.slice(0, path.lastIndexOf('/'));
+        let umlId = path.slice(path.lastIndexOf('/')+1);
+        if(this.props.auth.uid != umlId){
+            return <Redirect to={"/Wireframer/"+this.props.auth.uid} />
+        }
         return(
             <div className='edit-screen-container'>
                 <div className='wireframe-container'>

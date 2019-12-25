@@ -40,8 +40,8 @@ class LoginScreen extends Component {
   render() {
     const { auth, authError } = this.props;
     if (auth.uid) {
-      // return <Redirect to={"/wireframe/"+auth.uid} />;
-      return <Redirect to="/" />;
+      return <Redirect to={"/Wireframer/"+auth.uid} />;
+      // return <Redirect to="/" />;
     }
 
     return (
