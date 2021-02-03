@@ -1,0 +1,21 @@
+{
+  "files": {
+    "main.css": "/Wireframer/static/css/main.e6edbf56.chunk.css",
+    "main.js": "/Wireframer/static/js/main.d85695be.chunk.js",
+    "main.js.map": "/Wireframer/static/js/main.d85695be.chunk.js.map",
+    "runtime-main.js": "/Wireframer/static/js/runtime-main.4212764a.js",
+    "runtime-main.js.map": "/Wireframer/static/js/runtime-main.4212764a.js.map",
+    "static/js/2.5c56f5e4.chunk.js": "/Wireframer/static/js/2.5c56f5e4.chunk.js",
+    "static/js/2.5c56f5e4.chunk.js.map": "/Wireframer/static/js/2.5c56f5e4.chunk.js.map",
+    "index.html": "/Wireframer/index.html",
+    "precache-manifest.e3e8f09f632171eac930d5eec2375c17.js": "/Wireframer/precache-manifest.e3e8f09f632171eac930d5eec2375c17.js",
+    "service-worker.js": "/Wireframer/service-worker.js",
+    "static/css/main.e6edbf56.chunk.css.map": "/Wireframer/static/css/main.e6edbf56.chunk.css.map"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.4212764a.js",
+    "static/js/2.5c56f5e4.chunk.js",
+    "static/css/main.e6edbf56.chunk.css",
+    "static/js/main.d85695be.chunk.js"
+  ]
+}
