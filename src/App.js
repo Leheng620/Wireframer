@@ -19,7 +19,7 @@ class App extends Component {
     // But if not then we doesn't render the one.
     if (auth.isLoaded) {
       return (
-        <BrowserRouter>
+        <BrowserRouter basename="/Wireframer">
           <div className="App">
             <Navbar />
             <Switch>

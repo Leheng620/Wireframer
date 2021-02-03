@@ -2,7 +2,7 @@
   "name": "final_project",
   "version": "0.1.0",
   "private": true,
-  "homepage" : "http://Leheng620.github.io/Wireframer",
+  "homepage": "http://Leheng620.github.io/Wireframer",
   "dependencies": {
     "@babel/runtime": "^7.7.6",
     "classnames": "^2.2.6",
