@@ -186,7 +186,6 @@ class EditScreen extends Component{
             textColor: "#000000",
         }
         controls.push(newControl);
-        console.log(controls);
         this.setState({wireframe:frame, save: false});
     }
 
@@ -197,7 +196,6 @@ class EditScreen extends Component{
         if(!same){
             control.xPos = d.x;
             control.yPos = d.y;
-            console.log('fuck')
             this.setState({ wireframe: wireframe ,save: false});
         }
     }
@@ -223,7 +221,6 @@ class EditScreen extends Component{
     duplicate = (e) => {
         e.preventDefault();
         let wireframe = this.state.wireframe;
-        console.log(e.keyCode)
         if(e.ctrlKey && e.keyCode == 68 && this.state.selected){
             e.preventDefault();
             let newControl = JSON.parse(JSON.stringify(this.state.selected));
@@ -296,8 +293,6 @@ class EditScreen extends Component{
         }else{
             wireframe.name = "Unknown";
         }
-        console.log(e.target.value);
-        console.log(wireframe.name);
         this.setState({wireframe: wireframe, save: false});
     }
 
@@ -321,7 +316,6 @@ class EditScreen extends Component{
         let id = e.target.id;
         let wireframe = this.state.wireframe;
         if(id === 'canvas'){
-            console.log("noooo selected");
             this.setState({selected: null});
         }else{
             let index = this.findControl(id);

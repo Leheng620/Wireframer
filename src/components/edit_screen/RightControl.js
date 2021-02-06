@@ -6,7 +6,6 @@ class RightControl extends Component{
     change = (e) =>{
         let property = e.target.id;
         let value = e.target.value;
-        console.log(value);
         if(property == 'fontSize'){
             if (Number(value) < 0){
                 value = this.props.selected.fontSize;
@@ -18,7 +17,6 @@ class RightControl extends Component{
 
     clickColorPicker(e){
         let id = e.target.id.split('-')[0];
-        console.log(id);
         document.getElementById(id).click();
     }
 

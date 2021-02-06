@@ -19,7 +19,6 @@ class LeftControl extends Component{
     }
     handleUpdate = () => {
         const { width, height } = this.state;
-        console.log(typeof width);
         let widthError = false;
         let heightError = false;
         if(!Number(width) || !Number.isInteger(Number(width)) || Number(width) < 1 || Number(width) > 5000){
